@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Mathematics;
+using UnityEngine;
+
+public class GameEvents : MonoBehaviour
+{
+    public static GameEvents current;
+    // Start is called before the first frame update
+    void Awake()
+    {
+        current = this;
+    }
+
+    public event Action onNPCDialogStart;
+    public event Action onNPCDialogEnd;
+    public void NPCDialogStart() {
+        onNPCDialogStart?.Invoke();
+    }
+
+    public void NPCDialogEnd() {
+        onNPCDialogEnd?.Invoke();
+    }
+}

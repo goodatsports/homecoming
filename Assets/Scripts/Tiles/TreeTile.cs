@@ -14,8 +14,6 @@ public class TreeTile : CustomTile
     {
         // check with scriptable object stuff, this is not being tied to the specific tile, position
         Map = GameObject.Find("Map").GetComponentInChildren(typeof(MapController)) as MapController;
-        Debug.Log($"Tile found Map: {Map.ToString()}");
-        Debug.Log($"Tile obstacle map: {Map.ToString()}");
     }
 
     public override void Interact()

@@ -29,8 +29,7 @@ public class PointerController : MonoBehaviour
         Sprite.enabled = false;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
     {
         MousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         MouseAngle = GetMouseAngle(MousePos);

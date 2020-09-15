@@ -49,6 +49,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Toggle Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c7bb207-a997-4794-ae5d-264267829419"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -150,6 +158,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""ShowPointer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35f8b4cf-9108-424f-8f4a-7d8552400754"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Toggle Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -179,6 +198,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Swing = m_Player.FindAction("Swing", throwIfNotFound: true);
         m_Player_ShowPointer = m_Player.FindAction("ShowPointer", throwIfNotFound: true);
+        m_Player_ToggleInventory = m_Player.FindAction("Toggle Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -232,6 +252,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Swing;
     private readonly InputAction m_Player_ShowPointer;
+    private readonly InputAction m_Player_ToggleInventory;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -240,6 +261,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Swing => m_Wrapper.m_Player_Swing;
         public InputAction @ShowPointer => m_Wrapper.m_Player_ShowPointer;
+        public InputAction @ToggleInventory => m_Wrapper.m_Player_ToggleInventory;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -261,6 +283,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @ShowPointer.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowPointer;
                 @ShowPointer.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowPointer;
                 @ShowPointer.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowPointer;
+                @ToggleInventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
+                @ToggleInventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
+                @ToggleInventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -277,6 +302,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @ShowPointer.started += instance.OnShowPointer;
                 @ShowPointer.performed += instance.OnShowPointer;
                 @ShowPointer.canceled += instance.OnShowPointer;
+                @ToggleInventory.started += instance.OnToggleInventory;
+                @ToggleInventory.performed += instance.OnToggleInventory;
+                @ToggleInventory.canceled += instance.OnToggleInventory;
             }
         }
     }
@@ -296,5 +324,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnSwing(InputAction.CallbackContext context);
         void OnShowPointer(InputAction.CallbackContext context);
+        void OnToggleInventory(InputAction.CallbackContext context);
     }
 }

@@ -6,7 +6,13 @@ using UnityEngine;
 public class Dialog
 {
     public string name;
-    [TextArea(3,10)]
+    [TextArea(3, 10)]
     public string[] sentences;
+
+    public Dialog(string[] sentences, string name) {
+        this.sentences = sentences;
+        this.name = name;
+
+    }
 
 }

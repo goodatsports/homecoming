@@ -17,30 +17,44 @@ public enum Directions
 public class PlayerController : MonoBehaviour
 {
 	public InputMaster Controls;
-	public CinemachineVirtualCamera CM;
+	public CinemachineVirtualCameraBase CM;
+	public CinemachineTransposer CM_Transpose;
 	public CinemachineComposer CM_Composer;
-	public InputAction MovementAction, UseAction, SwingAction, ShowPointerAction;
+	public InputAction MovementAction, UseAction, SwingAction, ShowPointerAction, InventoryAction;
 	public PointerController Pointer;
+	public const float MOVE_DECAY = 0.125f;
+
+	private int Money;
+	public Item[] Inventory;
+
 	private MapController Map;
 	private Tilemap GroundMap, ObstacleMap;
 	private Vector3 ActionQuadrant;
 	private bool CanMove = true;
 	private Vector3 OFFSET_VECTOR = new Vector3(0.5f, 0.5f, 0);
-	public const float MOVE_DECAY = 0.125f;
+
 
     void Awake()
     {
 		Controls = new InputMaster();
 		Pointer = GameObject.Find("Pointer").GetComponent<PointerController>();
+
 		MovementAction = Controls.Player.Movement;
 		UseAction = Controls.Player.Use;
 		SwingAction = Controls.Player.Swing;
 		ShowPointerAction = Controls.Player.ShowPointer;
+		InventoryAction = Controls.Player.ToggleInventory;
 
 		ShowPointerAction.started += ctx => { Pointer.Show(); };
 		ShowPointerAction.canceled += ctx => { Pointer.Hide(); };
 		UseAction.started += ctx => { Interact(); };
 		SwingAction.started += ctx => { Swing(); };
+		InventoryAction.started += ctx => { ToggleInventory(); };
+		
+		
+
+		GameEvents.current.onNPCDialogStart += InConversation;
+		GameEvents.current.onNPCDialogEnd += OutConversation;
 	}
 
 	private void OnEnable()
@@ -51,11 +65,17 @@ public class PlayerController : MonoBehaviour
     void Start()
 	{
 		Map = GameObject.Find("Map").GetComponentInChildren(typeof(MapController)) as MapController;
-		if (Map.ObstacleMap == null) Debug.Log("Fuck player");
+		if (Map.ObstacleMap == null) Debug.Log("No obstacle map found!");
 
 		GroundMap = Map.GroundMap;
 		ObstacleMap = Map.ObstacleMap;
 		Physics2D.queriesStartInColliders = false;
+
+		Money = 0;
+		Inventory = new Item[] {
+			new Item("Barthe's Einhander", "it's big!", 30),
+			new Item("eggs", "eggs", 1)
+		};
 
 	}
 
@@ -75,6 +95,7 @@ public class PlayerController : MonoBehaviour
     {
 		if (collision.name == "ShopEntrance" && CM.Follow == transform)
 		{
+
 			Transform target = GameObject.Find("Shop LookAt Target").GetComponent<Transform>();
 			Debug.Log("shop transform: " + target.name);
 			CM.Follow = target;
@@ -88,8 +109,17 @@ public class PlayerController : MonoBehaviour
 	
     }
 
+	public void InConversation() {
+		print("In conversation");
+		CanMove = false;
+    }
+	public void OutConversation() {
+		print("out conversation");
+		CanMove = true;
+	}
 
-    public IEnumerator Move(Vector2 inputVector)
+
+	public IEnumerator Move(Vector2 inputVector)
 	{
 			MovePlayer(inputVector);
 			CanMove = false;
@@ -102,10 +132,12 @@ public class PlayerController : MonoBehaviour
 		//Layer mask; only looking for hits on character layer.
 		int characterLayer = 1 << 8;
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, ActionQuadrant, 1f, characterLayer);
-		if (hit.collider != null)
+		if (hit.collider)
 		{
 			Interactable target = hit.collider.GetComponent<Interactable>();
-			if (target != null) target.Interact();
+			if (target != null) {
+				target.Interact();
+			}
 			return;
 		}
     }
@@ -117,6 +149,14 @@ public class PlayerController : MonoBehaviour
 			CustomTile tile = ObstacleMap.GetTile<TreeTile>(tileAddress);
 			if (tile != null) Map.ChopTree(tileAddress);
 		}
+    }
+
+	public void ToggleInventory() {
+		foreach (Item i in Inventory) {
+			print(i.Name);
+			print(i.Description);
+			print(i.Value);
+        }
     }
 
 	void MovePlayer(Vector2 input)
@@ -132,15 +172,4 @@ public class PlayerController : MonoBehaviour
 			transform.position = GroundMap.CellToWorld(destinationTile) + OFFSET_VECTOR;
 		}
 	}
-
-	// old; uses tile-based hit detection instead of collider-based
-	//void MovePlayer(Vector2 input)
-	//{
-	//	Vector3 inputVector = Mathf.Abs(input.x) > Mathf.Abs(input.y) ? new Vector3(input.x, 0) : new Vector3(0, input.y);
-	//	Vector3Int destinationTile = Map.WorldToCell(transform.position + inputVector);
-	//	if (!ObstacleMap.HasTile(Vector3Int.FloorToInt(destinationTile)))
-	//	{ 
-	//		transform.position = GroundMap.CellToWorld(destinationTile) + OFFSET_VECTOR;
-	//	}
-	//}
 }

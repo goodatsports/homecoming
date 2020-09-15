@@ -13,6 +13,8 @@ public class DialogController : MonoBehaviour
     public Animator animator;
     public AudioClip sound;
     private AudioSource source { get { return GetComponent<AudioSource>(); } }
+    private bool _hasSentences = true;
+    public bool HasSentences { get => _hasSentences; private set { _hasSentences = value; }  }
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,7 @@ public class DialogController : MonoBehaviour
 
     public void DisplayNextSentence() {
         if (sentences.Count == 0) {
+            HasSentences = false;
             EndDialog();
             return;
         }

@@ -9,29 +9,36 @@ using Cinemachine;
 
 public class DialogController2 : MonoBehaviour
 {
-
-    public TextMeshProUGUI nameText;
+    public GameObject Textbox;
+    public SpriteRenderer Sprite;
+    public Image TextboxBackground;
+    public TextMeshPro nameText;
     public TextMeshPro dialogText;
     private Queue<string> sentences;
     public Animator animator;
     public AudioClip sound;
     private AudioSource source { get { return GetComponent<AudioSource>(); } }
+    private float TextboxHeight;
+    private bool _hasSentences = true;
+    public bool HasSentences { get => _hasSentences; private set { _hasSentences = value; } }
+
+    // Used to account for camera's distance from game board (10 units) when calculating viewport->worldpoint values
+    private float CAMERA_Z_OFFSET = 8f;
 
     // Start is called before the first frame update
     void Start()
     {
-      
-        dialogText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3 (0.5f,0.2f,8f));
-
-        // Document this somewhere else, 
-        // numbers come from the pixels-per-unit on the sprites - 32px per unit, so half height is that ratio multiplied by 2
-        dialogText.rectTransform.sizeDelta = new Vector2(Screen.width / 32, Screen.height / 64);
+        nameText.text = "";
+        dialogText.text = "";
+        TextboxHeight = TextboxBackground.GetComponent<RectTransform>().rect.height;
+        Textbox.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f, CAMERA_Z_OFFSET));
+        Textbox.SetActive(false);
         sentences = new Queue<string>();
+
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        dialogText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.1f, 8f));
     }
 
     void PlaySound()
@@ -41,14 +48,14 @@ public class DialogController2 : MonoBehaviour
 
     public void StartDialog(Dialog dialog)
     {
-        CameraState conversation = new CameraState();
-
-        Camera.main.transform.position = GameObject.Find("Player").GetComponent<Transform>().position;
-        gameObject.AddComponent<AudioSource>();
-        source.clip = sound;
-        source.playOnAwake = false;
-       // animator.SetBool("IsOpen", true);
-        //nameText.text = dialog.name;
+        HasSentences = true;
+        Textbox.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f + 0.2f, CAMERA_Z_OFFSET));
+        Textbox.SetActive(true);
+        // gameObject.AddComponent<AudioSource>();
+        //source.clip = sound;
+        //source.playOnAwake = false;
+        // animator.SetBool("IsOpen", true);
+        nameText.text = dialog.name;
         sentences.Clear();
 
         foreach (string sentence in dialog.sentences)
@@ -64,6 +71,7 @@ public class DialogController2 : MonoBehaviour
         if (sentences.Count == 0)
         {
             EndDialog();
+            print("in display sentences");
             return;
         }
 
@@ -87,9 +95,11 @@ public class DialogController2 : MonoBehaviour
         }
     }
 
-    void EndDialog()
+    public void EndDialog()
     {
         StopAllCoroutines();
+        Textbox.SetActive(false);
+        HasSentences = false;
         //animator.SetBool("IsOpen", false);
     }
 
