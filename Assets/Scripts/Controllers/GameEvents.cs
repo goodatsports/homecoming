@@ -22,4 +22,17 @@ public class GameEvents : MonoBehaviour
     public void NPCDialogEnd() {
         onNPCDialogEnd?.Invoke();
     }
+
+    public event Action onInventoryOpen;
+    public event Action onInventoryClose;
+
+    public void InventoryOpen() {
+        onInventoryOpen?.Invoke();
+    }
+    public void InventoryClose() {
+        onInventoryClose?.Invoke();
+    }
+
+
+
 }

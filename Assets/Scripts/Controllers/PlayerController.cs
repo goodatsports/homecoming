@@ -22,10 +22,10 @@ public class PlayerController : MonoBehaviour
 	public CinemachineComposer CM_Composer;
 	public InputAction MovementAction, UseAction, SwingAction, ShowPointerAction, InventoryAction;
 	public PointerController Pointer;
-	public const float MOVE_DECAY = 0.125f;
+	public InventoryController Inventory;
+	public const float MOVE_DECAY = .125f;
 
 	private int Money;
-	public Item[] Inventory;
 
 	private MapController Map;
 	private Tilemap GroundMap, ObstacleMap;
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
 		Controls = new InputMaster();
 		Pointer = GameObject.Find("Pointer").GetComponent<PointerController>();
+		Inventory = GameObject.Find("Inventory").GetComponent<InventoryController>();
 
 		MovementAction = Controls.Player.Movement;
 		UseAction = Controls.Player.Use;
@@ -49,12 +50,16 @@ public class PlayerController : MonoBehaviour
 		ShowPointerAction.canceled += ctx => { Pointer.Hide(); };
 		UseAction.started += ctx => { Interact(); };
 		SwingAction.started += ctx => { Swing(); };
-		InventoryAction.started += ctx => { ToggleInventory(); };
+		InventoryAction.started += ctx => { Inventory.Toggle(); };
 		
 		
+		//Events subscriptions
+		GameEvents.current.onNPCDialogStart += Busy;
+        GameEvents.current.onNPCDialogEnd += Ready;
+		GameEvents.current.onInventoryOpen += Busy;
+		GameEvents.current.onInventoryClose += Ready;
 
-		GameEvents.current.onNPCDialogStart += InConversation;
-		GameEvents.current.onNPCDialogEnd += OutConversation;
+
 	}
 
 	private void OnEnable()
@@ -62,8 +67,7 @@ public class PlayerController : MonoBehaviour
 		Controls.Enable();
     }
 
-    void Start()
-	{
+	void Start() {
 		Map = GameObject.Find("Map").GetComponentInChildren(typeof(MapController)) as MapController;
 		if (Map.ObstacleMap == null) Debug.Log("No obstacle map found!");
 
@@ -72,15 +76,11 @@ public class PlayerController : MonoBehaviour
 		Physics2D.queriesStartInColliders = false;
 
 		Money = 0;
-		Inventory = new Item[] {
-			new Item("Barthe's Einhander", "it's big!", 30),
-			new Item("eggs", "eggs", 1)
-		};
+
 
 	}
-
 	// Update is called once per frame
-	void FixedUpdate()
+	void LateUpdate()
 	{
 		Vector2 directionInput = MovementAction.ReadValue<Vector2>();
 		ActionQuadrant = Pointer.GetMouseQuadrant();
@@ -88,7 +88,6 @@ public class PlayerController : MonoBehaviour
         {
 			StartCoroutine(Move(directionInput));
         }
-   
 	}
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -110,21 +109,28 @@ public class PlayerController : MonoBehaviour
     }
 
 	public void InConversation() {
-		print("In conversation");
 		CanMove = false;
     }
 	public void OutConversation() {
-		print("out conversation");
+		
 		CanMove = true;
 	}
 
+	public void Busy() {
+		StopAllCoroutines();
+		CanMove = false;
+    }
+	public void Ready() {
+		StopAllCoroutines();
+		CanMove = true;
+	}
 
 	public IEnumerator Move(Vector2 inputVector)
 	{
-			MovePlayer(inputVector);
-			CanMove = false;
-			yield return new WaitForSeconds(MOVE_DECAY);
-			CanMove = true;
+		MovePlayer(inputVector);
+		CanMove = false;
+		yield return new WaitForSeconds(MOVE_DECAY);
+		CanMove = true;
 	}
 
 	public void Interact()
@@ -149,14 +155,6 @@ public class PlayerController : MonoBehaviour
 			CustomTile tile = ObstacleMap.GetTile<TreeTile>(tileAddress);
 			if (tile != null) Map.ChopTree(tileAddress);
 		}
-    }
-
-	public void ToggleInventory() {
-		foreach (Item i in Inventory) {
-			print(i.Name);
-			print(i.Description);
-			print(i.Value);
-        }
     }
 
 	void MovePlayer(Vector2 input)

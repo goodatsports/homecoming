@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9100a849f6f533649bb02b8b35b8c0be, type: 3}
+  m_Name: Helm of Nelahar
+  m_EditorClassIdentifier: 
+  Name: Helm of Nelahar
+  Description: Looted from a temple guard several moons ago
+  Value: 30
+  Sprite: {fileID: 6155459727475432099, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
