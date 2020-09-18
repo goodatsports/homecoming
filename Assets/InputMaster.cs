@@ -171,6 +171,107 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Dialog"",
+            ""id"": ""8545966f-1b41-4e61-a6ad-eaff86796744"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfa28880-2bd3-492d-af12-18d1d59cfbbc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""1afa2211-2826-4939-a3c8-2b6e1a414491"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""b4d89d6a-8d03-432d-ab4e-07a4b42b42ea"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveCursor"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""f5082dc9-5638-4f17-9e76-cb7d94502cb9"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""511130d7-94fc-4eaa-b425-d56ddd416a2d"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""8bc9b4df-4fce-4494-b928-2d23368f800a"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveCursor"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""a750d97a-d8d0-4b33-bff3-928da7e8fafa"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""0782b277-5a22-4e2e-af50-c40a5b6a023b"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8115c58a-84ef-4e00-9d68-7d7976ab4071"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -199,6 +300,10 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Swing = m_Player.FindAction("Swing", throwIfNotFound: true);
         m_Player_ShowPointer = m_Player.FindAction("ShowPointer", throwIfNotFound: true);
         m_Player_ToggleInventory = m_Player.FindAction("Toggle Inventory", throwIfNotFound: true);
+        // Dialog
+        m_Dialog = asset.FindActionMap("Dialog", throwIfNotFound: true);
+        m_Dialog_MoveCursor = m_Dialog.FindAction("MoveCursor", throwIfNotFound: true);
+        m_Dialog_Confirm = m_Dialog.FindAction("Confirm", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -309,6 +414,47 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Dialog
+    private readonly InputActionMap m_Dialog;
+    private IDialogActions m_DialogActionsCallbackInterface;
+    private readonly InputAction m_Dialog_MoveCursor;
+    private readonly InputAction m_Dialog_Confirm;
+    public struct DialogActions
+    {
+        private @InputMaster m_Wrapper;
+        public DialogActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveCursor => m_Wrapper.m_Dialog_MoveCursor;
+        public InputAction @Confirm => m_Wrapper.m_Dialog_Confirm;
+        public InputActionMap Get() { return m_Wrapper.m_Dialog; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DialogActions set) { return set.Get(); }
+        public void SetCallbacks(IDialogActions instance)
+        {
+            if (m_Wrapper.m_DialogActionsCallbackInterface != null)
+            {
+                @MoveCursor.started -= m_Wrapper.m_DialogActionsCallbackInterface.OnMoveCursor;
+                @MoveCursor.performed -= m_Wrapper.m_DialogActionsCallbackInterface.OnMoveCursor;
+                @MoveCursor.canceled -= m_Wrapper.m_DialogActionsCallbackInterface.OnMoveCursor;
+                @Confirm.started -= m_Wrapper.m_DialogActionsCallbackInterface.OnConfirm;
+                @Confirm.performed -= m_Wrapper.m_DialogActionsCallbackInterface.OnConfirm;
+                @Confirm.canceled -= m_Wrapper.m_DialogActionsCallbackInterface.OnConfirm;
+            }
+            m_Wrapper.m_DialogActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MoveCursor.started += instance.OnMoveCursor;
+                @MoveCursor.performed += instance.OnMoveCursor;
+                @MoveCursor.canceled += instance.OnMoveCursor;
+                @Confirm.started += instance.OnConfirm;
+                @Confirm.performed += instance.OnConfirm;
+                @Confirm.canceled += instance.OnConfirm;
+            }
+        }
+    }
+    public DialogActions @Dialog => new DialogActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -325,5 +471,10 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnSwing(InputAction.CallbackContext context);
         void OnShowPointer(InputAction.CallbackContext context);
         void OnToggleInventory(InputAction.CallbackContext context);
+    }
+    public interface IDialogActions
+    {
+        void OnMoveCursor(InputAction.CallbackContext context);
+        void OnConfirm(InputAction.CallbackContext context);
     }
 }

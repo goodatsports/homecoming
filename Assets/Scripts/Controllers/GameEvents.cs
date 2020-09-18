@@ -33,6 +33,17 @@ public class GameEvents : MonoBehaviour
         onInventoryClose?.Invoke();
     }
 
+    public event Action onWaitForDialogChoice;
+
+    //Make this send along input choice, either through int for option in menu, or something else
+    public event Action<int> onDialogChoiceMade;
+
+    public void WaitForDialogChoice() {
+        onWaitForDialogChoice?.Invoke();
+    }
+    public void DialogChoiceMade(int choice) {
+        onDialogChoiceMade?.Invoke(choice);
+    }
 
 
 }

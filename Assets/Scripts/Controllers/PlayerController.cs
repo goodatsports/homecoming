@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour
 	public CinemachineVirtualCameraBase CM;
 	public CinemachineTransposer CM_Transpose;
 	public CinemachineComposer CM_Composer;
-	public InputAction MovementAction, UseAction, SwingAction, ShowPointerAction, InventoryAction;
+	public InputAction MovementAction, 
+		UseAction, SwingAction, ShowPointerAction, InventoryAction, 
+		DialogCursorAction, DialogConfirmAction;
 	public PointerController Pointer;
 	public InventoryController Inventory;
 	public const float MOVE_DECAY = .125f;
@@ -46,6 +48,9 @@ public class PlayerController : MonoBehaviour
 		ShowPointerAction = Controls.Player.ShowPointer;
 		InventoryAction = Controls.Player.ToggleInventory;
 
+		DialogCursorAction = Controls.Dialog.MoveCursor;
+		DialogConfirmAction = Controls.Dialog.Confirm;
+
 		ShowPointerAction.started += ctx => { Pointer.Show(); };
 		ShowPointerAction.canceled += ctx => { Pointer.Hide(); };
 		UseAction.started += ctx => { Interact(); };
@@ -58,13 +63,30 @@ public class PlayerController : MonoBehaviour
         GameEvents.current.onNPCDialogEnd += Ready;
 		GameEvents.current.onInventoryOpen += Busy;
 		GameEvents.current.onInventoryClose += Ready;
+		GameEvents.current.onWaitForDialogChoice += WaitingOnDialogChoice;
 
 
 	}
 
 	private void OnEnable()
     {
-		Controls.Enable();
+		Controls.Player.Enable();
+    }
+
+	// Various control states for player which are controlled via GameEvents messages
+	void Busy() {
+		StopAllCoroutines();
+		MovementAction.Disable();
+	}
+	void Ready() {
+		StopAllCoroutines();
+		MovementAction.Enable();
+	}
+
+	void WaitingOnDialogChoice() {
+		Controls.Player.Disable();
+		Controls.Dialog.Enable();
+
     }
 
 	void Start() {
@@ -76,10 +98,8 @@ public class PlayerController : MonoBehaviour
 		Physics2D.queriesStartInColliders = false;
 
 		Money = 0;
-
-
 	}
-	// Update is called once per frame
+
 	void LateUpdate()
 	{
 		Vector2 directionInput = MovementAction.ReadValue<Vector2>();
@@ -107,23 +127,6 @@ public class PlayerController : MonoBehaviour
 		CM.LookAt = transform;
 	
     }
-
-	public void InConversation() {
-		CanMove = false;
-    }
-	public void OutConversation() {
-		
-		CanMove = true;
-	}
-
-	public void Busy() {
-		StopAllCoroutines();
-		CanMove = false;
-    }
-	public void Ready() {
-		StopAllCoroutines();
-		CanMove = true;
-	}
 
 	public IEnumerator Move(Vector2 inputVector)
 	{
