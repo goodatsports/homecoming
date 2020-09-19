@@ -6,13 +6,19 @@ using UnityEngine;
 public class Dialog
 {
     public string name;
-    [TextArea(3, 10)]
-    public string[] sentences;
+    public Sentence[] sentences;
+    //[TextArea(3, 10)]
 
     public Dialog(string[] sentences, string name) {
-        this.sentences = sentences;
-        this.name = name;
 
+        Sentence[] dialogContent = new Sentence[sentences.Length];
+        int index = 0;
+        foreach (string sentence in sentences) {
+            dialogContent[index] = new Sentence(sentence);
+            index++;
+        }
+        this.sentences = dialogContent;
+        this.name = name;
     }
 
 }

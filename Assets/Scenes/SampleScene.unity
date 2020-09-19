@@ -748,18 +748,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627970bb98e3ea043a1710f423f378d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Briggs
+  Name: 
   Dialog:
     name: 
     sentences:
-    - 'Another sellsword without a war to fight, left to wander in search of a bloodless
-      new life, eh? '
-    - 'Don''t even recognize ye under all that armor and scars, if this is your homecoming. '
-    - 'Well, if you''re looking for purpose, this grove was left to grow and rot
-      when the youth shipped off to conquer. Could use a hand in it cleaning up. '
-    - ...
-    - Don't think blades and wargear will fare well against dead oak. Might want
-      to check Demza's wares to the east. He may have something better for the task.
+    - Content: what's up
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        OptionChoice: 0
+    - Content: dude
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        OptionChoice: 0
+    - Content: dsafdsafdsafdsafdsafdsafdsa
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        OptionChoice: 0
   DialogController: {fileID: 1444564}
   InitialDialog:
     name: Briggs
@@ -3089,15 +3096,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 740128749}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4262ba85b9d3924b8a63eae23f75977, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a7aa1e5bb71ecc48873950f8809bf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Crag
   Dialog:
-    name: Crag
+    name: 
     sentences:
-    - Hi
-    - There
+    - Content: gfdsgfd
+      hasChoice: 1
+      SentenceChoice:
+        Options: []
+        OptionChoice: 0
+    - Content: ehhhhh
+      hasChoice: 1
+      SentenceChoice:
+        Options:
+        - 
+        - 
+        OptionChoice: 0
   DialogController: {fileID: 1444564}
 --- !u!4 &740128754 stripped
 Transform:

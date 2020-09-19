@@ -6,13 +6,21 @@ using UnityEngine;
 public class Choice
 {
     public string[] Options;
+    public int OptionChoice;
 }
 
+// class for Response? 
+// 
 
 [System.Serializable]
 public class Sentence {
     public string Content;
-    public Choice SentenceChoice;    
+    public bool hasChoice;
+    public Choice SentenceChoice;  
+    
+    public Sentence(string content) {
+        this.Content = content;
+    }
 }
 
 

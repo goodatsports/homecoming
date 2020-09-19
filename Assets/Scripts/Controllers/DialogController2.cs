@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using System.Runtime.CompilerServices;
@@ -10,35 +11,46 @@ using Cinemachine;
 public class DialogController2 : MonoBehaviour
 {
     public GameObject Textbox;
+    public GameObject ChoiceUI;
     public SpriteRenderer Sprite;
     public Image TextboxBackground;
     public TextMeshPro nameText;
     public TextMeshPro dialogText;
-    private Queue<string> sentences;
+    public ChoiceController Choices;
     public Animator animator;
     public AudioClip sound;
     private AudioSource source { get { return GetComponent<AudioSource>(); } }
-    private float TextboxHeight;
+
+    public InputMaster Controls;
+    public InputAction CursorMove, CursorConfirm;
+
+    private Queue<Sentence> sentences;
+    private bool isTyping = false;
+    private Sentence currentSentence;
     private bool _hasSentences = true;
     public bool HasSentences { get => _hasSentences; private set { _hasSentences = value; } }
 
     // Used to account for camera's distance from game board (10 units) when calculating viewport->worldpoint values
     private float CAMERA_Z_OFFSET = 8f;
 
+    private void Awake() {
+        Controls = new InputMaster();
+        CursorMove = Controls.Dialog.MoveCursor;
+        CursorConfirm = Controls.Dialog.Confirm;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         nameText.text = "";
         dialogText.text = "";
-        TextboxHeight = TextboxBackground.GetComponent<RectTransform>().rect.height;
         Textbox.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f, CAMERA_Z_OFFSET));
+
         Textbox.SetActive(false);
-        sentences = new Queue<string>();
+        ChoiceUI.SetActive(false);
 
-    }
+        sentences = new Queue<Sentence>();
 
-    private void LateUpdate()
-    {
     }
 
     void PlaySound()
@@ -58,7 +70,7 @@ public class DialogController2 : MonoBehaviour
         nameText.text = dialog.name;
         sentences.Clear();
 
-        foreach (string sentence in dialog.sentences)
+        foreach (Sentence sentence in dialog.sentences)
         {
             sentences.Enqueue(sentence);
         }
@@ -68,20 +80,41 @@ public class DialogController2 : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
+        if (sentences.Count == 0 && !isTyping)
         {
             EndDialog();
             print("in display sentences");
             return;
         }
 
-        string sentence = sentences.Dequeue();
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+        // If current sentence is still being typed out, 
+        // stop typing and write out all at once 
+        if (isTyping) {
+            StopAllCoroutines();
+            dialogText.text = currentSentence.Content;
+            isTyping = false;
+        }
+        else {
+            currentSentence = sentences.Dequeue();
+
+            // Prompt choice if current sentence has one
+            if (currentSentence.hasChoice) {
+                PromptChoice(currentSentence.SentenceChoice);
+            }
+            StopAllCoroutines();
+            StartCoroutine(TypeSentence(currentSentence.Content));
+        }
+    }
+
+    public void PromptChoice(Choice sentenceChoice) {
+        GameEvents.current.WaitForDialogChoice();
+        Choices.Prompt(sentenceChoice);
+        
     }
 
     IEnumerator TypeSentence(string sentence)
     {
+        isTyping = true;
         dialogText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
@@ -93,6 +126,7 @@ public class DialogController2 : MonoBehaviour
             yield return null;
             yield return null;
         }
+        isTyping = false;
     }
 
     public void EndDialog()

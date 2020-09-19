@@ -9,7 +9,7 @@ public class DialogController : MonoBehaviour
 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogText;
-    private Queue<string> sentences;
+    private Queue<Sentence> sentences;
     public Animator animator;
     public AudioClip sound;
     private AudioSource source { get { return GetComponent<AudioSource>(); } }
@@ -19,7 +19,7 @@ public class DialogController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sentences = new Queue<string>();
+        sentences = new Queue<Sentence>();
     }
 
     void PlaySound() {
@@ -35,9 +35,9 @@ public class DialogController : MonoBehaviour
         nameText.text = dialog.name;
         sentences.Clear();
 
-        foreach (string sentence in dialog.sentences) 
+        foreach (Sentence sen in dialog.sentences) 
         {
-            sentences.Enqueue(sentence);
+            sentences.Enqueue(sen);
         }
 
         DisplayNextSentence();
@@ -50,9 +50,10 @@ public class DialogController : MonoBehaviour
             return;
         }
 
-        string sentence = sentences.Dequeue();
+        Sentence sentence = sentences.Dequeue();
+        if (sentence.hasChoice) print("CHOICE HERE!");
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+        StartCoroutine(TypeSentence(sentence.Content));
     }
 
     IEnumerator TypeSentence (string sentence) {
