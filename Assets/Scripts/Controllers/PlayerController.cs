@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
 		GameEvents.current.onInventoryOpen += Busy;
 		GameEvents.current.onInventoryClose += Ready;
 		GameEvents.current.onWaitForDialogChoice += WaitingOnDialogChoice;
+		GameEvents.current.onDialogChoiceMade += DialogChoiceMade;
 
 
 	}
@@ -82,12 +83,18 @@ public class PlayerController : MonoBehaviour
 		StopAllCoroutines();
 		MovementAction.Enable();
 	}
-
 	void WaitingOnDialogChoice() {
 		Controls.Player.Disable();
 		Controls.Dialog.Enable();
 
     }
+
+	void DialogChoiceMade(Sentence sentence) {
+		Controls.Player.Enable();
+		MovementAction.Disable();
+		Controls.Dialog.Disable();
+
+	}
 
 	void Start() {
 		Map = GameObject.Find("Map").GetComponentInChildren(typeof(MapController)) as MapController;

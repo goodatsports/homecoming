@@ -11,6 +11,10 @@ public class BriggsNPCController : NPCController
         InitialDialog = new Dialog(new string[] { "Hail", "Binch" }, Name);       
     }
 
+    void Awake() {
+        base.Awake();
+    }
+
     public override void Interact() {
         if (TimesTalkedTo != 0) {
             base.Interact();

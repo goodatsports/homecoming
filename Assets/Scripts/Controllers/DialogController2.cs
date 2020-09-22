@@ -7,6 +7,7 @@ using TMPro;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using Cinemachine;
+using System.Runtime.InteropServices.ComTypes;
 
 public class DialogController2 : MonoBehaviour
 {
@@ -37,6 +38,11 @@ public class DialogController2 : MonoBehaviour
         Controls = new InputMaster();
         CursorMove = Controls.Dialog.MoveCursor;
         CursorConfirm = Controls.Dialog.Confirm;
+
+        CursorMove.started += ctx => { MoveCursor(ctx.ReadValue<float>()); };
+        CursorConfirm.started += ctx => { Choices.Confirm(); };
+
+        GameEvents.current.onDialogChoiceMade += ChoiceMade;
     }
 
     // Start is called before the first frame update
@@ -101,16 +107,30 @@ public class DialogController2 : MonoBehaviour
             if (currentSentence.hasChoice) {
                 PromptChoice(currentSentence.SentenceChoice);
             }
-            StopAllCoroutines();
+            //StopAllCoroutines();
             StartCoroutine(TypeSentence(currentSentence.Content));
+            print("current sentence: " + currentSentence.Content);
         }
     }
 
     public void PromptChoice(Choice sentenceChoice) {
+        Controls.Dialog.Enable();
         GameEvents.current.WaitForDialogChoice();
-        Choices.Prompt(sentenceChoice);
-        
+        StartCoroutine(Choices.Resolve(sentenceChoice));
     }
+
+    public void ChoiceMade(Sentence resolution) {
+        print("Choice made function here");
+        StartCoroutine(TypeSentence(resolution.Content));
+        Controls.Dialog.Disable();
+    }
+
+    void MoveCursor(float input) {
+        print("dialog cursor move: " + input);
+        if (input > 0) Choices.Right();
+        else Choices.Left();
+    }
+
 
     IEnumerator TypeSentence(string sentence)
     {

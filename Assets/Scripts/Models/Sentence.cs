@@ -7,6 +7,9 @@ public class Choice
 {
     public string[] Options;
     public int OptionChoice;
+    // Resolution of choice, index of Options should correspond to index of related response
+    public string[] Responses;
+
 }
 
 // class for Response? 

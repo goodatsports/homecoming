@@ -34,12 +34,12 @@ public class GameEvents : MonoBehaviour
     }
 
     public event Action onWaitForDialogChoice;
-    public event Action<int> onDialogChoiceMade;
+    public event Action<Sentence> onDialogChoiceMade;
 
     public void WaitForDialogChoice() {
         onWaitForDialogChoice?.Invoke();
     }
-    public void DialogChoiceMade(int choice) {
+    public void DialogChoiceMade(Sentence choice) {
         onDialogChoiceMade?.Invoke(choice);
     }
 
