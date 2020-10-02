@@ -12,11 +12,11 @@ public class ChoiceController : MonoBehaviour
 
     // Currently selected choice
     private int ChoiceSelect = 0;
-    // Choice that player confirms with input as their choice
+    // Choice that player confirms with input 
     private int Decision = -1;
 
     // Response from player's confirmed Choice
-    public Sentence Resolution;
+    public Response Resolution;
     // Start is called before the first frame update
 
     private void Awake() 
@@ -35,10 +35,11 @@ public class ChoiceController : MonoBehaviour
         Choice2.text = choice.Options[1];
         // wait for user to confirm choice
         print("decision: " + Decision);
-
         yield return new WaitUntil(() => Decision > -1);
         print("DECISION MADE - resolve");
-        Resolution = new Sentence(choice.Responses[Decision]);
+
+        // Get corresponding Response from Choice and pass as an event message back to DialogController
+        Resolution = choice.Responses[Decision];
         GameEvents.current.DialogChoiceMade(Resolution);
         Reset();
     }

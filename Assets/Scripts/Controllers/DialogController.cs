@@ -9,7 +9,7 @@ using UnityEditor;
 using Cinemachine;
 using System.Runtime.InteropServices.ComTypes;
 
-public class DialogController2 : MonoBehaviour
+public class DialogController : MonoBehaviour
 {
     public GameObject Textbox;
     public GameObject ChoiceUI;
@@ -33,6 +33,8 @@ public class DialogController2 : MonoBehaviour
 
     // Used to account for camera's distance from game board (10 units) when calculating viewport->worldpoint values
     private float CAMERA_Z_OFFSET = 8f;
+
+    private float TYPING_SPEED = 0.025f;
 
     private void Awake() {
         Controls = new InputMaster();
@@ -69,10 +71,10 @@ public class DialogController2 : MonoBehaviour
         HasSentences = true;
         Textbox.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f + 0.2f, CAMERA_Z_OFFSET));
         Textbox.SetActive(true);
+
         // gameObject.AddComponent<AudioSource>();
         //source.clip = sound;
         //source.playOnAwake = false;
-        // animator.SetBool("IsOpen", true);
         nameText.text = dialog.name;
         sentences.Clear();
 
@@ -89,25 +91,24 @@ public class DialogController2 : MonoBehaviour
         if (sentences.Count == 0 && !isTyping)
         {
             EndDialog();
-            print("in display sentences");
+            print("ending dialog");
             return;
         }
+
+        StopAllCoroutines();
 
         // If current sentence is still being typed out, 
         // stop typing and write out all at once 
         if (isTyping) {
-            StopAllCoroutines();
             dialogText.text = currentSentence.Content;
             isTyping = false;
         }
         else {
             currentSentence = sentences.Dequeue();
-
             // Prompt choice if current sentence has one
             if (currentSentence.hasChoice) {
                 PromptChoice(currentSentence.SentenceChoice);
             }
-            //StopAllCoroutines();
             StartCoroutine(TypeSentence(currentSentence.Content));
             print("current sentence: " + currentSentence.Content);
         }
@@ -119,10 +120,21 @@ public class DialogController2 : MonoBehaviour
         StartCoroutine(Choices.Resolve(sentenceChoice));
     }
 
-    public void ChoiceMade(Sentence resolution) {
-        print("Choice made function here");
-        StartCoroutine(TypeSentence(resolution.Content));
+    public void ChoiceMade(Response resolution) {
+        StopAllCoroutines();
+        currentSentence = new Sentence(resolution.String);
+
+        StartCoroutine(TypeSentence(currentSentence.Content));
         Controls.Dialog.Disable();
+
+        if (resolution.HasEvent) {
+            ResolveResponseEvent(resolution);
+        }
+    }
+
+    void ResolveResponseEvent(Response response) {
+        EndDialog();
+        GameEvents.current.DialogChoiceEvent(response.EventId);
     }
 
     void MoveCursor(float input) {
@@ -140,11 +152,7 @@ public class DialogController2 : MonoBehaviour
         {
             dialogText.text += letter;
            // PlaySound();
-            yield return null;
-            yield return null;
-            yield return null;
-            yield return null;
-            yield return null;
+            yield return new WaitForSeconds(TYPING_SPEED);
         }
         isTyping = false;
     }

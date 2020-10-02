@@ -272,6 +272,142 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Shopping"",
+            ""id"": ""d8a4c54a-fbeb-48ee-aa10-23811aa3b8e1"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveShopCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a3cf945-00eb-4cef-8d9c-94db9ded73e6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""EndShopping"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b61c2bc-1979-4909-afed-bd648e50a172"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ItemInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""db27e1bf-d96e-4ecb-8e9e-33dbe92bb549"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""8f0fee6e-afe5-48e1-8ff2-50b1ff2dcad7"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveShopCursor"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""f90e6248-4f0f-4487-b530-e55304608c20"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveShopCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""908bafb8-3945-4d11-bb74-59eb47fbb883"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveShopCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74648998-7d9a-431d-af46-ffa1a33f5b56"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""EndShopping"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4c61ad3-697b-4bd4-9c7a-58231ba518fb"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ItemInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Inventory"",
+            ""id"": ""c20999a8-8747-4f8f-9b9a-6b4503468096"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveInventoryCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""04ba6fae-9c76-444d-9726-d0f287732e20"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""a43a5464-cfb2-4620-86e2-18fe82a60280"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveInventoryCursor"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""9fb8b557-2d27-4432-ac49-d6fcf02dea9f"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveInventoryCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""37c70926-07a7-4511-90ce-b71307219a47"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveInventoryCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -304,6 +440,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Dialog = asset.FindActionMap("Dialog", throwIfNotFound: true);
         m_Dialog_MoveCursor = m_Dialog.FindAction("MoveCursor", throwIfNotFound: true);
         m_Dialog_Confirm = m_Dialog.FindAction("Confirm", throwIfNotFound: true);
+        // Shopping
+        m_Shopping = asset.FindActionMap("Shopping", throwIfNotFound: true);
+        m_Shopping_MoveShopCursor = m_Shopping.FindAction("MoveShopCursor", throwIfNotFound: true);
+        m_Shopping_EndShopping = m_Shopping.FindAction("EndShopping", throwIfNotFound: true);
+        m_Shopping_ItemInteract = m_Shopping.FindAction("ItemInteract", throwIfNotFound: true);
+        // Inventory
+        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
+        m_Inventory_MoveInventoryCursor = m_Inventory.FindAction("MoveInventoryCursor", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -455,6 +599,88 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public DialogActions @Dialog => new DialogActions(this);
+
+    // Shopping
+    private readonly InputActionMap m_Shopping;
+    private IShoppingActions m_ShoppingActionsCallbackInterface;
+    private readonly InputAction m_Shopping_MoveShopCursor;
+    private readonly InputAction m_Shopping_EndShopping;
+    private readonly InputAction m_Shopping_ItemInteract;
+    public struct ShoppingActions
+    {
+        private @InputMaster m_Wrapper;
+        public ShoppingActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveShopCursor => m_Wrapper.m_Shopping_MoveShopCursor;
+        public InputAction @EndShopping => m_Wrapper.m_Shopping_EndShopping;
+        public InputAction @ItemInteract => m_Wrapper.m_Shopping_ItemInteract;
+        public InputActionMap Get() { return m_Wrapper.m_Shopping; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ShoppingActions set) { return set.Get(); }
+        public void SetCallbacks(IShoppingActions instance)
+        {
+            if (m_Wrapper.m_ShoppingActionsCallbackInterface != null)
+            {
+                @MoveShopCursor.started -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnMoveShopCursor;
+                @MoveShopCursor.performed -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnMoveShopCursor;
+                @MoveShopCursor.canceled -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnMoveShopCursor;
+                @EndShopping.started -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnEndShopping;
+                @EndShopping.performed -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnEndShopping;
+                @EndShopping.canceled -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnEndShopping;
+                @ItemInteract.started -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnItemInteract;
+                @ItemInteract.performed -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnItemInteract;
+                @ItemInteract.canceled -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnItemInteract;
+            }
+            m_Wrapper.m_ShoppingActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MoveShopCursor.started += instance.OnMoveShopCursor;
+                @MoveShopCursor.performed += instance.OnMoveShopCursor;
+                @MoveShopCursor.canceled += instance.OnMoveShopCursor;
+                @EndShopping.started += instance.OnEndShopping;
+                @EndShopping.performed += instance.OnEndShopping;
+                @EndShopping.canceled += instance.OnEndShopping;
+                @ItemInteract.started += instance.OnItemInteract;
+                @ItemInteract.performed += instance.OnItemInteract;
+                @ItemInteract.canceled += instance.OnItemInteract;
+            }
+        }
+    }
+    public ShoppingActions @Shopping => new ShoppingActions(this);
+
+    // Inventory
+    private readonly InputActionMap m_Inventory;
+    private IInventoryActions m_InventoryActionsCallbackInterface;
+    private readonly InputAction m_Inventory_MoveInventoryCursor;
+    public struct InventoryActions
+    {
+        private @InputMaster m_Wrapper;
+        public InventoryActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveInventoryCursor => m_Wrapper.m_Inventory_MoveInventoryCursor;
+        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
+        public void SetCallbacks(IInventoryActions instance)
+        {
+            if (m_Wrapper.m_InventoryActionsCallbackInterface != null)
+            {
+                @MoveInventoryCursor.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMoveInventoryCursor;
+                @MoveInventoryCursor.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMoveInventoryCursor;
+                @MoveInventoryCursor.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMoveInventoryCursor;
+            }
+            m_Wrapper.m_InventoryActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MoveInventoryCursor.started += instance.OnMoveInventoryCursor;
+                @MoveInventoryCursor.performed += instance.OnMoveInventoryCursor;
+                @MoveInventoryCursor.canceled += instance.OnMoveInventoryCursor;
+            }
+        }
+    }
+    public InventoryActions @Inventory => new InventoryActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -476,5 +702,15 @@ public class @InputMaster : IInputActionCollection, IDisposable
     {
         void OnMoveCursor(InputAction.CallbackContext context);
         void OnConfirm(InputAction.CallbackContext context);
+    }
+    public interface IShoppingActions
+    {
+        void OnMoveShopCursor(InputAction.CallbackContext context);
+        void OnEndShopping(InputAction.CallbackContext context);
+        void OnItemInteract(InputAction.CallbackContext context);
+    }
+    public interface IInventoryActions
+    {
+        void OnMoveInventoryCursor(InputAction.CallbackContext context);
     }
 }

@@ -34,13 +34,32 @@ public class GameEvents : MonoBehaviour
     }
 
     public event Action onWaitForDialogChoice;
-    public event Action<Sentence> onDialogChoiceMade;
+    public event Action<Response> onDialogChoiceMade;
 
     public void WaitForDialogChoice() {
         onWaitForDialogChoice?.Invoke();
     }
-    public void DialogChoiceMade(Sentence choice) {
+    public void DialogChoiceMade(Response choice) {
         onDialogChoiceMade?.Invoke(choice);
+    }
+
+    public event Action onShoppingStart;
+    public event Action onShoppingEnd;
+
+    public void DialogChoiceEvent(int eventId) {
+        switch (eventId) {
+            // Init shopping 
+            case 1:
+                onShoppingStart?.Invoke();
+                break;
+            case 0:
+                break;
+        }
+
+    }
+
+    public void ShoppingEnd() {
+        onShoppingEnd?.Invoke();
     }
 
 

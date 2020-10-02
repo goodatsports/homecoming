@@ -8,12 +8,9 @@ public class BriggsNPCController : NPCController
     public Dialog InitialDialog;
     // Start is called before the first frame update
     void Start() {
-        InitialDialog = new Dialog(new string[] { "Hail", "Binch" }, Name);       
+        InitialDialog = new Dialog(new string[] { "Hail", "Binch" }, Name);
     }
 
-    void Awake() {
-        base.Awake();
-    }
 
     public override void Interact() {
         if (TimesTalkedTo != 0) {

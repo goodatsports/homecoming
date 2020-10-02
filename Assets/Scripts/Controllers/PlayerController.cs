@@ -35,13 +35,17 @@ public class PlayerController : MonoBehaviour
 	private bool CanMove = true;
 	private Vector3 OFFSET_VECTOR = new Vector3(0.5f, 0.5f, 0);
 
+	private Vector3[] DirectionVectors = { Vector3.right, Vector3.up, Vector3.left, Vector3.down };
+
 
     void Awake()
     {
 		Controls = new InputMaster();
 		Pointer = GameObject.Find("Pointer").GetComponent<PointerController>();
-		Inventory = GameObject.Find("Inventory").GetComponent<InventoryController>();
+		Inventory = GameObject.Find("Player Inventory").GetComponent<InventoryController>();
 
+
+		// Input action mapping
 		MovementAction = Controls.Player.Movement;
 		UseAction = Controls.Player.Use;
 		SwingAction = Controls.Player.Swing;
@@ -65,6 +69,7 @@ public class PlayerController : MonoBehaviour
 		GameEvents.current.onInventoryClose += Ready;
 		GameEvents.current.onWaitForDialogChoice += WaitingOnDialogChoice;
 		GameEvents.current.onDialogChoiceMade += DialogChoiceMade;
+		GameEvents.current.onShoppingStart += Shopping;
 
 
 	}
@@ -81,22 +86,27 @@ public class PlayerController : MonoBehaviour
 	}
 	void Ready() {
 		StopAllCoroutines();
+		Controls.Player.Enable();
 		MovementAction.Enable();
+		CanMove = true;
 	}
 	void WaitingOnDialogChoice() {
 		Controls.Player.Disable();
 		Controls.Dialog.Enable();
 
     }
-
-	void DialogChoiceMade(Sentence sentence) {
-		Controls.Player.Enable();
-		MovementAction.Disable();
+	void DialogChoiceMade(Response sentence) {
+		Controls.Player.Use.Enable();
 		Controls.Dialog.Disable();
 
 	}
+	void Shopping() {
+		Controls.Player.Disable();
+		Controls.Dialog.Disable();
+		
+    }
 
-	void Start() {
+	void Start() {	
 		Map = GameObject.Find("Map").GetComponentInChildren(typeof(MapController)) as MapController;
 		if (Map.ObstacleMap == null) Debug.Log("No obstacle map found!");
 
@@ -147,14 +157,16 @@ public class PlayerController : MonoBehaviour
     {
 		//Layer mask; only looking for hits on character layer.
 		int characterLayer = 1 << 8;
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, ActionQuadrant, 1f, characterLayer);
-		if (hit.collider)
-		{
-			Interactable target = hit.collider.GetComponent<Interactable>();
-			if (target != null) {
-				target.Interact();
+
+		foreach (Vector3 dir in DirectionVectors) {
+			RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 1f, characterLayer);
+			if (hit.collider) {
+				Interactable target = hit.collider.GetComponent<Interactable>();
+				if (target != null) {
+					target.Interact();
+				}
+				return;
 			}
-			return;
 		}
     }
 
