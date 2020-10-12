@@ -21,4 +21,9 @@ public class Dialog
         this.name = name;
     }
 
+    public Dialog(Sentence[] sentences, string name) {
+        this.name = name;
+        this.sentences = sentences;
+    }
+
 }

@@ -176,6 +176,7 @@ public class PlayerController : MonoBehaviour
 			var tileAddress = Map.WorldToCell(transform.position + ActionQuadrant);
 			CustomTile tile = ObstacleMap.GetTile<TreeTile>(tileAddress);
 			if (tile != null) Map.ChopTree(tileAddress);
+			
 		}
     }
 

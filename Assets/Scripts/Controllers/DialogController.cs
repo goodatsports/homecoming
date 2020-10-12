@@ -26,6 +26,7 @@ public class DialogController : MonoBehaviour
     public InputAction CursorMove, CursorConfirm;
 
     private Queue<Sentence> sentences;
+    private Dialog WorkingDialog;
     private bool isTyping = false;
     private Sentence currentSentence;
     private bool _hasSentences = true;
@@ -66,8 +67,21 @@ public class DialogController : MonoBehaviour
         source.PlayOneShot(sound);
     }
 
+    // Used to play one-shot dialog without interrupting current Dialog structure
+    public IEnumerator AddDialog(Dialog newDialog) {
+        Queue<Sentence> currentDialog = sentences;
+        WorkingDialog = newDialog;
+
+        StartDialog(newDialog);
+        yield return new WaitUntil(() => HasSentences == false);
+        print("End of AddDialog");
+        //sentences = currentDialog;
+
+    }
+
     public void StartDialog(Dialog dialog)
     {
+        WorkingDialog = dialog;
         HasSentences = true;
         Textbox.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f + 0.2f, CAMERA_Z_OFFSET));
         Textbox.SetActive(true);
@@ -134,6 +148,7 @@ public class DialogController : MonoBehaviour
 
     void ResolveResponseEvent(Response response) {
         EndDialog();
+        print("RESOLVE RESPONSE EVENT");
         GameEvents.current.DialogChoiceEvent(response.EventId);
     }
 
@@ -159,6 +174,7 @@ public class DialogController : MonoBehaviour
 
     public void EndDialog()
     {
+        print("end dialog called");
         StopAllCoroutines();
         Textbox.SetActive(false);
         HasSentences = false;

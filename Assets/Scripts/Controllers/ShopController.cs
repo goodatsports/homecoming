@@ -13,6 +13,7 @@ public enum Sides
 public class ShopController : MonoBehaviour
 {
     public InventoryController PlayerInventory, NPCInventory;
+    //public DialogController ShopDialog;
    
     public InputMaster Controls;
     public InputAction MoveCursorAction, ItemInteractAction, EndShopAction;
@@ -82,8 +83,9 @@ public class ShopController : MonoBehaviour
     }
 
     void BuyPrompt() {
+        //ShopDialog.StartDialog(new Dialog(new string[]{"Buy item?"}, ""));
         ShopNPC.OnBuyPrompt(NPCInventory.GetActiveItemInfo());
-        print("buy: " + NPCInventory.GetActiveItemInfo());
+        //print("buy: " + NPCInventory.GetActiveItemInfo());
     }
 
     void SellPrompt() {

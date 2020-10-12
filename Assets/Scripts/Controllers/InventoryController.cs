@@ -102,7 +102,6 @@ public class InventoryController : MonoBehaviour
     public void Active() {
         Pointer.enabled = true;
     }
-
     public void Inactive() {
         Pointer.enabled = false;
 

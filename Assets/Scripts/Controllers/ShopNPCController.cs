@@ -14,27 +14,44 @@ public class ShopNPCController : NPCController
 
     }
 
-    public override void Interact() {
-        if (ShopController.isActive) {
+    protected override void OnStateChange() {
+        if (States.Count == 0) {
+            GameEvents.current.NPCDialogEnd();
+            return;
         }
         else {
-            base.Interact();
+            NPCStates currentState = States.Peek();
+
+            if (currentState == NPCStates.Shopping) {
+                ShopController.Open();
+            }
+            else if (currentState == NPCStates.Talking) {
+                AdvanceDialog();
+            }
         }
     }
 
     public void Shop() {
-        Interacting = false;
-        ShopController.Open();
-
+        AddState(NPCStates.Shopping);
     }
     public void OnBuyPrompt(Item item) {
-        Interact(new Dialog(new string[] {
-            $"you want to buy {item.Name}?"
-        }, Name));
+        //StartCoroutine(DialogController.AddDialog(new Dialog(new string[] {
+        //    $"you want to buy {item.Name}?"
+        //}, Name)));
+        StartCoroutine(DialogController.AddDialog(new Dialog(new Sentence[] {
+            new Sentence($"You want to buy {item.name}?",
+                new Choice(new string[] { "yes", "no" },
+                    new Response[] { new Response("cool", true, 2), 
+                                     new Response("not so cool", true, 3) })) },
+            Name)));
+        AddState(NPCStates.Talking);
+
+        print("States: " + States);
     }
 
     void OnShopClose() {
-        new Dialog(new string[] { "Bye", "Binch" }, Name);
-        Interact(new Dialog(new string[] { "Bye", "Binch" }, Name));
+        PopState();
+        DialogController.AddDialog(new Dialog(new string[] { "Bye", "Binch" }, Name));
+
     }
 }

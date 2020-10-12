@@ -14,8 +14,10 @@ public class NPCController : Interactable
     public string Name;
     public Dialog Dialog;
     public DialogController DialogController;
-    private Stack<NPCStates> States;
+    protected Stack<NPCStates> States;
     protected bool Interacting = false;
+    public Queue<Dialog> RecurringDialog;
+
 
     protected virtual void Awake()
     {
@@ -24,57 +26,75 @@ public class NPCController : Interactable
     }
     public override void Interact()
     {
-        Interact(Dialog);
+        if (States.Count == 0) {
+            print("Interact: no states in stack");
+            AddState(NPCStates.Talking);
+        } else {
+            print("Interact: state change");
+            OnStateChange();
+        }
+        //Interact(Dialog);
     }
     
-    void AddState(NPCStates newState) {
+    protected void AddState(NPCStates newState) {
         States.Push(newState);
-        CheckState();
+        OnStateChange();
     }
 
-    void PopState() {
+    protected void PopState() {
         States.Pop();
-        CheckState();
+        OnStateChange();
     }
 
-    void CheckState() {
+    protected virtual void OnStateChange() {
         if (States.Count == 0) {
             GameEvents.current.NPCDialogEnd();
             return;
         }
         else {
-            NPCStates currentState = States.Peek();
-
-            if (currentState == NPCStates.Shopping) {
-
-            }
-            else if (currentState == NPCStates.Talking) {
-
+            if (States.Peek() == NPCStates.Talking) {
+                print("advancing dialog");
+                AdvanceDialog();
             }
         }    
     }
 
-    void AdvanceDialog() {
-
-    }
-
-    public void Interact(Dialog newDialog) {
+    protected void AdvanceDialog() {
         if (!Interacting) {
-            print("NPC controller: first interaction");
+            print("Advance Dialog: first interaction");
             Interacting = true;
             GameEvents.current.NPCDialogStart();
-            DialogController.StartDialog(newDialog);
+            DialogController.StartDialog(Dialog);
         }
         else if (DialogController.HasSentences) {
             DialogController.DisplayNextSentence();
-            print("NPC controller: next sentence");
+            print("Advance Dialog: next sentence");
 
         }
         if (!DialogController.HasSentences) {
-            print("NPC controller: end dialog");
-
             Interacting = false;
-            GameEvents.current.NPCDialogEnd();
+            print("popping state");
+            PopState();
         }
     }
+
+    //public void Interact(Dialog newDialog) {
+    //    if (!Interacting) {
+    //        print("NPC controller: first interaction");
+    //        Interacting = true;
+    //        GameEvents.current.NPCDialogStart();
+    //        DialogController.StartDialog(newDialog);
+    //    }
+    //    else if (DialogController.HasSentences) {
+    //        DialogController.DisplayNextSentence();
+    //        print("NPC controller: next sentence");
+
+    //    }
+    //    if (!DialogController.HasSentences) {
+    //        print("NPC controller: end dialog");
+
+    //        Interacting = false;
+    //        GameEvents.current.NPCDialogEnd();
+    //    }
+    //}
 }

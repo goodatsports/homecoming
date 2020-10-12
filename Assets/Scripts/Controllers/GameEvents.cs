@@ -7,21 +7,14 @@ using UnityEngine;
 public class GameEvents : MonoBehaviour
 {
     public static GameEvents current;
+    public GameManager Manager;
     // Start is called before the first frame update
     void Awake()
     {
         current = this;
     }
 
-    public event Action onNPCDialogStart;
-    public event Action onNPCDialogEnd;
-    public void NPCDialogStart() {
-        onNPCDialogStart?.Invoke();
-    }
-
-    public void NPCDialogEnd() {
-        onNPCDialogEnd?.Invoke();
-    }
+    // Player Inventory events
 
     public event Action onInventoryOpen;
     public event Action onInventoryClose;
@@ -33,8 +26,19 @@ public class GameEvents : MonoBehaviour
         onInventoryClose?.Invoke();
     }
 
+    // Dialog events
+
+    public event Action onNPCDialogStart;
+    public event Action onNPCDialogEnd;
     public event Action onWaitForDialogChoice;
     public event Action<Response> onDialogChoiceMade;
+    public void NPCDialogStart() {
+        onNPCDialogStart?.Invoke();
+    }
+
+    public void NPCDialogEnd() {
+        onNPCDialogEnd?.Invoke();
+    }
 
     public void WaitForDialogChoice() {
         onWaitForDialogChoice?.Invoke();
@@ -43,8 +47,17 @@ public class GameEvents : MonoBehaviour
         onDialogChoiceMade?.Invoke(choice);
     }
 
+    // Shopping events
+
     public event Action onShoppingStart;
     public event Action onShoppingEnd;
+
+    public event Action onShoppingItemBuyNo;
+    public event Action onShoppingItemBuyYes;
+
+    public void ShoppingEnd() {
+        onShoppingEnd?.Invoke();
+    }
 
     public void DialogChoiceEvent(int eventId) {
         switch (eventId) {
@@ -52,14 +65,28 @@ public class GameEvents : MonoBehaviour
             case 1:
                 onShoppingStart?.Invoke();
                 break;
+            case 2:
+                onShoppingItemBuyYes?.Invoke();
+                print("ITEM BUY MESSAGE");
+                break;
+            case 3:
+                onShoppingItemBuyNo?.Invoke();
+                print("ITEM SELL MESSAGE");
+                break;
             case 0:
                 break;
         }
-
     }
 
-    public void ShoppingEnd() {
-        onShoppingEnd?.Invoke();
+    // Tree Chopping events
+    public event Action onTreeChopped;
+
+    public void TreeChopped() {
+        onTreeChopped?.Invoke();
+    }
+
+    public bool CheckTreesChopped() {
+        return GameEvents.current.CheckTreesChopped();
     }
 
 
