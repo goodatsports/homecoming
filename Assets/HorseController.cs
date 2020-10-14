@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class HorseController : MonoBehaviour
 {
+    enum Sides
+    {
+        Left,
+        Right
+    }
+
     public SpriteRenderer Sprite;
     private Vector3 Home;
     private Vector3 MaxDistance;
     public Vector3 Destination;
     private bool Moving = false;
+    private Sides Facing = Sides.Right;
     // Start is called before the first frame update
     void Start() 
     {
@@ -39,9 +46,7 @@ public class HorseController : MonoBehaviour
 
         while (distanceVector != Vector3.zero) {
             distanceVector = Destination - transform.position;
-            print("horse distance: " + distanceVector);
             Vector3 normalDistance = distanceVector.normalized;
-            print("normalized distance: " + normalDistance);
 
             if (Mathf.Abs(normalDistance.x) > Mathf.Abs(normalDistance.y)) {
                 closestX = normalDistance.x > 0 ? Mathf.Ceil(normalDistance.x) : Mathf.Floor(normalDistance.x);
@@ -56,22 +61,35 @@ public class HorseController : MonoBehaviour
             Vector3 closestTile = new Vector3(closestX, closestY);
             yield return StartCoroutine(Move(closestTile));
         }
-        print("horse reached destination");
+
         Moving = false;
         yield return new WaitForSeconds(1f);
     }
 
     IEnumerator Move(Vector3 destination) {
-        print("moving horse: " + destination);
-        Sprite.transform.position += new Vector3(destination.x, destination.y);
-        yield return new WaitForSeconds(1f);
+        // Change side horse is facing if switching directions on the X axis
+        if (Facing == Sides.Left && destination.x > 0) {
+            Facing = Sides.Right;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        if (Facing == Sides.Right && destination.x < 0) {
+            Facing = Sides.Left;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+          
+        }
+        transform.position += new Vector3(destination.x, destination.y);
+
+        yield return new WaitForSeconds(2f);
     }
 
-    // Update is called once per frame
+    void UpdateFacing() {
+
+    }
+
     void Update()
     {
         if (!Moving) {
-            print("horse roaming...");
             StartCoroutine(Roam());
         }
     }
