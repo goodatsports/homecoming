@@ -21,23 +21,22 @@ public class PlayerController : MonoBehaviour
 	public CinemachineTransposer CM_Transpose;
 	public CinemachineComposer CM_Composer;
 	public InputAction MovementAction, 
-		UseAction, SwingAction, ShowPointerAction, InventoryAction, 
+		UseAction, SwingAction, RopeAction, ShowPointerAction, InventoryAction, 
 		DialogCursorAction, DialogConfirmAction;
 	public PointerController Pointer;
 	public InventoryController Inventory;
-	public const float MOVE_DECAY = .125f;
-
-	private int Money;
+	
 
 	private MapController Map;
 	private Tilemap GroundMap, ObstacleMap;
 	private Vector3 ActionQuadrant;
 	private bool CanMove = true;
 	private Vector3 OFFSET_VECTOR = new Vector3(0.5f, 0.5f, 0);
-
 	private Vector3[] DirectionVectors = { Vector3.right, Vector3.up, Vector3.left, Vector3.down };
+	private const float MOVE_DECAY = .125f;
 
 
+    #region Initialization
     void Awake()
     {
 		Controls = new InputMaster();
@@ -49,6 +48,7 @@ public class PlayerController : MonoBehaviour
 		MovementAction = Controls.Player.Movement;
 		UseAction = Controls.Player.Use;
 		SwingAction = Controls.Player.Swing;
+		RopeAction = Controls.Player.ThrowRope;
 		ShowPointerAction = Controls.Player.ShowPointer;
 		InventoryAction = Controls.Player.ToggleInventory;
 
@@ -58,7 +58,8 @@ public class PlayerController : MonoBehaviour
 		ShowPointerAction.started += ctx => { Pointer.Show(); };
 		ShowPointerAction.canceled += ctx => { Pointer.Hide(); };
 		UseAction.started += ctx => { Interact(); };
-		SwingAction.started += ctx => { Swing(); };
+		SwingAction.started += ctx => { SwingAxe(); };
+		RopeAction.started += ctx => { ThrowRope(); };
 		InventoryAction.started += ctx => { Inventory.Toggle(); };
 		
 		
@@ -74,10 +75,30 @@ public class PlayerController : MonoBehaviour
 
 	}
 
-	private void OnEnable()
+    private void OnEnable()
     {
 		Controls.Player.Enable();
     }
+	void Start() {
+		Map = GameObject.Find("Map").GetComponentInChildren(typeof(MapController)) as MapController;
+		if (Map.ObstacleMap == null) Debug.Log("No obstacle map found!");
+
+		GroundMap = Map.GroundMap;
+		ObstacleMap = Map.ObstacleMap;
+		Physics2D.queriesStartInColliders = false;
+	}
+
+	void LateUpdate() {
+		Vector2 directionInput = MovementAction.ReadValue<Vector2>();
+		ActionQuadrant = Pointer.GetMouseQuadrant();
+		if (directionInput != Vector2.zero && CanMove) {
+			StartCoroutine(Move(directionInput));
+		}
+	}
+	#endregion
+
+
+	#region States
 
 	// Various control states for player which are controlled via GameEvents messages
 	void Busy() {
@@ -90,7 +111,7 @@ public class PlayerController : MonoBehaviour
 		MovementAction.Enable();
 		CanMove = true;
 	}
-	void WaitingOnDialogChoice() {
+	void WaitingOnDialogChoice() { 
 		Controls.Player.Disable();
 		Controls.Dialog.Enable();
 
@@ -105,27 +126,7 @@ public class PlayerController : MonoBehaviour
 		Controls.Dialog.Disable();
 		
     }
-
-	void Start() {	
-		Map = GameObject.Find("Map").GetComponentInChildren(typeof(MapController)) as MapController;
-		if (Map.ObstacleMap == null) Debug.Log("No obstacle map found!");
-
-		GroundMap = Map.GroundMap;
-		ObstacleMap = Map.ObstacleMap;
-		Physics2D.queriesStartInColliders = false;
-
-		Money = 0;
-	}
-
-	void LateUpdate()
-	{
-		Vector2 directionInput = MovementAction.ReadValue<Vector2>();
-		ActionQuadrant = Pointer.GetMouseQuadrant();
-		if (directionInput != Vector2.zero && CanMove)
-        {
-			StartCoroutine(Move(directionInput));
-        }
-	}
+    #endregion
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -170,7 +171,7 @@ public class PlayerController : MonoBehaviour
 		}
     }
 
-	public void Swing()
+	public void SwingAxe()
     {
 		{
 			var tileAddress = Map.WorldToCell(transform.position + ActionQuadrant);
@@ -178,6 +179,27 @@ public class PlayerController : MonoBehaviour
 			if (tile != null) Map.ChopTree(tileAddress);
 			
 		}
+    }
+
+	public void ThrowRope() {
+		int ropeLength = 3;
+		int i = 1;
+		while (i <= ropeLength) { 
+			Vector3Int targetTile = Map.WorldToCell(transform.position + ActionQuadrant * i);
+			if (Map.HasRopeable(targetTile)) {
+				print("has ropeable!");
+				MoveSprite(targetTile);
+				return;
+			}
+
+			if (Map.HasObstacle(targetTile)) {
+				print($"obstacle found at {targetTile}: {Map.ObstacleMap.GetTile(targetTile)}");
+				return;
+            }
+
+			Map.PaintRope(targetTile, ActionQuadrant);
+			i++;
+        }
     }
 
 	void MovePlayer(Vector2 input)
@@ -190,7 +212,25 @@ public class PlayerController : MonoBehaviour
 
 		if (hit.collider == null)
 		{
+			Vector3Int oldTile = Map.WorldToCell(transform.position);
 			transform.position = GroundMap.CellToWorld(destinationTile) + OFFSET_VECTOR;
+
+			//Setting collision tile at new address and removing old one.
+			ObstacleMap.SetTile(destinationTile, TileBase.CreateInstance<CustomTile>());
+			TileBase.Destroy(ObstacleMap.GetTile<CustomTile>(oldTile));
+
 		}
+	}
+
+	// Need to refactor; basically moves the player while skipping usual movement flow; to be used when Rope hits a 
+	// usable tile and "teleports" player
+	void MoveSprite(Vector3Int destination) {
+		Vector3Int oldTile = Map.WorldToCell(transform.position);
+		transform.position = GroundMap.CellToWorld(destination) + OFFSET_VECTOR;
+
+		//Setting collision tile at new address and removing old one.
+		ObstacleMap.SetTile(destination, TileBase.CreateInstance<CustomTile>());
+		TileBase.Destroy(ObstacleMap.GetTile<CustomTile>(oldTile));
+
 	}
 }

@@ -57,6 +57,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ThrowRope"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a0d3c2a-c124-425e-90e1-f1e91faac750"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -167,6 +175,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""Toggle Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a2f08cf-93cf-4c1d-a4d9-2e224199cc25"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ThrowRope"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -436,6 +455,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Swing = m_Player.FindAction("Swing", throwIfNotFound: true);
         m_Player_ShowPointer = m_Player.FindAction("ShowPointer", throwIfNotFound: true);
         m_Player_ToggleInventory = m_Player.FindAction("Toggle Inventory", throwIfNotFound: true);
+        m_Player_ThrowRope = m_Player.FindAction("ThrowRope", throwIfNotFound: true);
         // Dialog
         m_Dialog = asset.FindActionMap("Dialog", throwIfNotFound: true);
         m_Dialog_MoveCursor = m_Dialog.FindAction("MoveCursor", throwIfNotFound: true);
@@ -502,6 +522,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Swing;
     private readonly InputAction m_Player_ShowPointer;
     private readonly InputAction m_Player_ToggleInventory;
+    private readonly InputAction m_Player_ThrowRope;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -511,6 +532,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Swing => m_Wrapper.m_Player_Swing;
         public InputAction @ShowPointer => m_Wrapper.m_Player_ShowPointer;
         public InputAction @ToggleInventory => m_Wrapper.m_Player_ToggleInventory;
+        public InputAction @ThrowRope => m_Wrapper.m_Player_ThrowRope;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -535,6 +557,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @ToggleInventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
                 @ToggleInventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
                 @ToggleInventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
+                @ThrowRope.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowRope;
+                @ThrowRope.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowRope;
+                @ThrowRope.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowRope;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -554,6 +579,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @ToggleInventory.started += instance.OnToggleInventory;
                 @ToggleInventory.performed += instance.OnToggleInventory;
                 @ToggleInventory.canceled += instance.OnToggleInventory;
+                @ThrowRope.started += instance.OnThrowRope;
+                @ThrowRope.performed += instance.OnThrowRope;
+                @ThrowRope.canceled += instance.OnThrowRope;
             }
         }
     }
@@ -697,6 +725,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnSwing(InputAction.CallbackContext context);
         void OnShowPointer(InputAction.CallbackContext context);
         void OnToggleInventory(InputAction.CallbackContext context);
+        void OnThrowRope(InputAction.CallbackContext context);
     }
     public interface IDialogActions
     {

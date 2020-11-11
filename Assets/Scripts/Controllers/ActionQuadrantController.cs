@@ -6,6 +6,7 @@ public class ActionQuadrantController : MonoBehaviour
 {
     public PointerController Pointer;
     private SpriteRenderer[] Arrows;
+    private Vector3 Direction;
 
 
     // Start is called before the first frame update
@@ -15,13 +16,17 @@ public class ActionQuadrantController : MonoBehaviour
         Arrows = gameObject.GetComponentsInChildren<SpriteRenderer>();
     }
 
-    public void SetActiveQuadrant(Vector3 direction)
+    public void SetActiveQuadrant(Vector3 dir)
     {
+        Direction = dir;
+        if (dir == Vector3.up) UpdateArrows(Directions.Up);
+        if (dir == Vector3.right) UpdateArrows(Directions.Right);
+        if (dir == Vector3.left) UpdateArrows(Directions.Left);
+        if (dir == Vector3.down) UpdateArrows(Directions.Down);
+    }
 
-        if (direction == Vector3.up) UpdateArrows(Directions.Up);
-        if (direction == Vector3.right) UpdateArrows(Directions.Right);
-        if (direction == Vector3.left) UpdateArrows(Directions.Left);
-        if (direction == Vector3.down) UpdateArrows(Directions.Down);
+    public Vector3 GetActiveQuadrant() {
+        return Direction;
     }
 
     private void UpdateArrows(Directions activeQuadrant)

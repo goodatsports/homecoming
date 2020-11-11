@@ -61,7 +61,7 @@ public class PointerController : MonoBehaviour
 
     private Vector3 GetMouseQuadrant(float angle)
     {
-        // Removing sign from angle, clamping it to 360 degrees, and applying angle offset
+        // Remove sign from angle, clamp it to 360 degrees, and apply angle offset
         angle = (angle + 360) % 360 + QUADRANT_ANGLE_OFFSET;
         if (angle % 360 <= 90) return Vector3.right;
         if (angle % 360 <= 180) return Vector3.up;

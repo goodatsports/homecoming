@@ -4,14 +4,17 @@ using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum Sides
-{
-    Left,
-    Right
-}
+
 
 public class ShopController : MonoBehaviour
 {
+    protected enum Sides
+    {
+        Left,
+        Right
+    }
+
+
     public InventoryController PlayerInventory, NPCInventory;
     //public DialogController ShopDialog;
    

@@ -15,7 +15,7 @@ public class ShopNPCController : NPCController
     }
 
     protected override void OnStateChange() {
-        if (States.Count == 0) {
+        if (States.Count == 1) {
             GameEvents.current.NPCDialogEnd();
             return;
         }
