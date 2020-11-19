@@ -30,10 +30,17 @@ public class PlayerController : MonoBehaviour
 	private MapController Map;
 	private Tilemap GroundMap, ObstacleMap;
 	private Vector3 ActionQuadrant;
-	private bool CanMove = true;
+
+	[SerializeField]
+	public bool CanMove = true;
+	public bool CanRope = true;
+	private bool MoveActionHeld = false;
+
 	private Vector3 OFFSET_VECTOR = new Vector3(0.5f, 0.5f, 0);
 	private Vector3[] DirectionVectors = { Vector3.right, Vector3.up, Vector3.left, Vector3.down };
+	private Vector2 DirectionInput;
 	private const float MOVE_DECAY = .125f;
+	private const float ROPE_DECAY = .075f;
 
 
     #region Initialization
@@ -57,11 +64,27 @@ public class PlayerController : MonoBehaviour
 
 		ShowPointerAction.started += ctx => { Pointer.Show(); };
 		ShowPointerAction.canceled += ctx => { Pointer.Hide(); };
+
+		MovementAction.started += ctx => {
+			MoveActionHeld = true;
+		};
+
+		MovementAction.canceled += ctx => {
+			MoveActionHeld = false;
+		};
+
 		UseAction.started += ctx => { Interact(); };
 		SwingAction.started += ctx => { SwingAxe(); };
-		RopeAction.started += ctx => { ThrowRope(); };
+
+		RopeAction.started += ctx => {
+			if (CanRope) {
+				MovementAction.Disable();
+				CanRope = false;
+				ThrowRope();
+			}
+		};
+
 		InventoryAction.started += ctx => { Inventory.Toggle(); };
-		
 		
 		//Events subscriptions
 		GameEvents.current.onNPCDialogStart += Busy;
@@ -79,6 +102,7 @@ public class PlayerController : MonoBehaviour
     {
 		Controls.Player.Enable();
     }
+
 	void Start() {
 		Map = GameObject.Find("Map").GetComponentInChildren(typeof(MapController)) as MapController;
 		if (Map.ObstacleMap == null) Debug.Log("No obstacle map found!");
@@ -88,12 +112,17 @@ public class PlayerController : MonoBehaviour
 		Physics2D.queriesStartInColliders = false;
 	}
 
-	void LateUpdate() {
-		Vector2 directionInput = MovementAction.ReadValue<Vector2>();
+	void Update() {
+		DirectionInput = MovementAction.ReadValue<Vector2>();
 		ActionQuadrant = Pointer.GetMouseQuadrant();
-		if (directionInput != Vector2.zero && CanMove) {
-			StartCoroutine(Move(directionInput));
+		if (MoveActionHeld && CanMove && DirectionInput != Vector2.zero) {
+			StartCoroutine(Move(DirectionInput));
+
 		}
+	}
+
+	void LateUpdate() {
+		
 	}
 	#endregion
 
@@ -148,8 +177,9 @@ public class PlayerController : MonoBehaviour
 
 	public IEnumerator Move(Vector2 inputVector)
 	{
-		MovePlayer(inputVector);
+		// Refactor: change to based on time since last move, or something more elegant than this
 		CanMove = false;
+		MovePlayer(inputVector);
 		yield return new WaitForSeconds(MOVE_DECAY);
 		CanMove = true;
 	}
@@ -173,32 +203,68 @@ public class PlayerController : MonoBehaviour
 
 	public void SwingAxe()
     {
-		{
-			var tileAddress = Map.WorldToCell(transform.position + ActionQuadrant);
-			CustomTile tile = ObstacleMap.GetTile<TreeTile>(tileAddress);
-			if (tile != null) Map.ChopTree(tileAddress);
-			
-		}
+        var tileAddress = Map.WorldToCell(transform.position + ActionQuadrant);
+		CustomTile tile = ObstacleMap.GetTile<TreeTile>(tileAddress);
+		if (tile != null) Map.ChopTree(tileAddress);
     }
 
-	public void ThrowRope() {
-		int ropeLength = 3;
-		int i = 1;
-		while (i <= ropeLength) { 
-			Vector3Int targetTile = Map.WorldToCell(transform.position + ActionQuadrant * i);
+	void ThrowRope() {
+		int ropeLength = 5;
+		Vector3 direction = ActionQuadrant;
+		for (int i = 1; i <= ropeLength; i++) {
+			Vector3Int targetTile = Map.WorldToCell(transform.position + direction * i);
+			
+			// If a ropeable target is hit, begin animating movement towards target
 			if (Map.HasRopeable(targetTile)) {
 				print("has ropeable!");
-				MoveSprite(targetTile);
+				//StopAllCoroutines();
+				StartCoroutine(AnimateRopeMovement(targetTile, direction));
 				return;
 			}
 
+			// If rope hits obstacle, end rope state
 			if (Map.HasObstacle(targetTile)) {
 				print($"obstacle found at {targetTile}: {Map.ObstacleMap.GetTile(targetTile)}");
-				return;
-            }
 
-			Map.PaintRope(targetTile, ActionQuadrant);
-			i++;
+				StartCoroutine(ResetInputFlags());
+				StartCoroutine(ClearRopeTiles(Map.WorldToCell(transform.position), direction, ropeLength));
+				return;
+			}
+
+			else {
+				StartCoroutine(PaintRope(targetTile, direction));
+			}
+		}
+		// Rope went full distance without hitting a target, return player control and remove rope tiles
+		StartCoroutine(ResetInputFlags());
+		StartCoroutine(ClearRopeTiles(Map.WorldToCell(transform.position), direction, ropeLength));
+	}
+
+	IEnumerator AnimateRopeMovement (Vector3Int targetTile, Vector3 direction) {
+		Vector3Int playerTile = Map.WorldToCell(transform.position);
+		Vector3Int startTile = playerTile;
+		while (Vector3.Distance(playerTile, targetTile) > 1) { 
+			yield return MoveSprite(playerTile + Vector3Int.FloorToInt(direction));
+			Map.ClearRopeTile(playerTile);
+			playerTile = Map.WorldToCell(transform.position);
+		}
+
+		// jank; clears player's destination tile since it doesn't happen in above loop
+		Map.ClearRopeTile(playerTile);
+		StartCoroutine(ResetInputFlags());
+    }
+
+	IEnumerator PaintRope(Vector3Int targetTile, Vector3 direction) {
+		Map.PaintRope(targetTile, direction);
+		yield return new WaitForSeconds(0.25f);
+    }
+
+	IEnumerator ClearRopeTiles(Vector3Int startTile, Vector3 direction, int distance) {
+		while (distance >= 0) {
+			Vector3Int target = startTile + Vector3Int.FloorToInt(direction) * distance;
+			Map.ClearRopeTile(target);
+			distance--;
+			yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -224,13 +290,21 @@ public class PlayerController : MonoBehaviour
 
 	// Need to refactor; basically moves the player while skipping usual movement flow; to be used when Rope hits a 
 	// usable tile and "teleports" player
-	void MoveSprite(Vector3Int destination) {
-		Vector3Int oldTile = Map.WorldToCell(transform.position);
+	IEnumerator MoveSprite(Vector3Int destination) {
+        Vector3Int oldTile = Map.WorldToCell(transform.position);
 		transform.position = GroundMap.CellToWorld(destination) + OFFSET_VECTOR;
 
 		//Setting collision tile at new address and removing old one.
 		ObstacleMap.SetTile(destination, TileBase.CreateInstance<CustomTile>());
 		TileBase.Destroy(ObstacleMap.GetTile<CustomTile>(oldTile));
-
+		yield return new WaitForSeconds(0.1f);
 	}
+
+	// Reset flags for taking movement and using rope after a delay
+	IEnumerator ResetInputFlags() {
+		yield return new WaitForSeconds(ROPE_DECAY);
+		MovementAction.Enable();
+		CanRope = true;
+		yield return null;
+    }
 }

@@ -45,6 +45,10 @@ public class NPCController : Interactable
 
     protected virtual void Awake()
     {
+        for (int i = 0; i < Dialog.sentences.Length; i++) {
+            Dialog.sentences[i].Content = Dialog.sentences[i].Content.Replace("\\n", "\n");
+        }
+
         Dialog.name = Name;
         States = new Stack<NPCStates>();
         Map = GameObject.Find("Map").GetComponent<MapController>();
@@ -90,7 +94,7 @@ public class NPCController : Interactable
             distanceVector = Destination - transform.position;
             Vector3 normalDistance = distanceVector.normalized;
 
-            // Move on axis with shortest distance to destinatio
+            // Move on axis with shortest distance to destination
             if (Mathf.Abs(normalDistance.x) > Mathf.Abs(normalDistance.y)) {
                 closestX = normalDistance.x > 0 ? Mathf.Ceil(normalDistance.x) : Mathf.Floor(normalDistance.x);
                 closestY = 0f;

@@ -8,6 +8,9 @@ using JetBrains.Annotations;
 public class MapController : MonoBehaviour
 {
     public GridLayout Map;
+    public GameObject DamageTextPrefab;
+    public Animation DamageAnimation;
+
 
     [SerializeField]
     public TileBase GrassTile;
@@ -78,6 +81,8 @@ public class MapController : MonoBehaviour
 
             }
         }
+        DamageAnimation = DamageTextPrefab.GetComponent<Animation>();
+
     }
 
     public void ChopTree(Vector3Int address)
@@ -85,7 +90,7 @@ public class MapController : MonoBehaviour
         TreeController target = TreeMap[address];
 
         if (target != null) {
-            target.Hit();
+            target.Hit(DamageTextPrefab);
         }
         else return;
 
@@ -104,6 +109,10 @@ public class MapController : MonoBehaviour
         } else if (dir == Vector3.left || dir == Vector3.right) {
             AboveGroundMap.SetTile(address, LeftRightRope);
         }
+    }
+
+    public void ClearRopeTile(Vector3Int address) {
+        AboveGroundMap.SetTile(address, null);
     }
 
     public Vector3Int WorldToCell(Vector3 position)
