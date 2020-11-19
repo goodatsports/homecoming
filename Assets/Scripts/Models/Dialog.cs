@@ -7,7 +7,6 @@ public class Dialog
 {
     public string name;
     public Sentence[] sentences;
-    //[TextArea(3, 10)]
 
     public Dialog(string[] sentences, string name) {
 

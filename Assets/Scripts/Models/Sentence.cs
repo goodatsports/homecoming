@@ -31,7 +31,9 @@ public class Response
 
 [System.Serializable]
 public class Sentence {
+    [TextArea(3, 6)]
     public string Content;
+
     public bool hasChoice = false;
     public Choice SentenceChoice;  
     
