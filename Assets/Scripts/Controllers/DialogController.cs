@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using Cinemachine;
@@ -11,6 +12,7 @@ using System.Runtime.InteropServices.ComTypes;
 
 public class DialogController : MonoBehaviour
 {
+    public Scene MainScene;
     public GameObject Textbox;
     public GameObject ChoiceUI;
     public SpriteRenderer Sprite;
@@ -45,6 +47,7 @@ public class DialogController : MonoBehaviour
         CursorMove.started += ctx => { MoveCursor(ctx.ReadValue<float>()); };
         CursorConfirm.started += ctx => { Choices.Confirm(); };
 
+        
         GameEvents.current.onDialogChoiceMade += ChoiceMade;
     }
 

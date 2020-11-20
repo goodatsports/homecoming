@@ -482,6 +482,33 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Intro"",
+            ""id"": ""910a014d-89f9-42ba-a57b-f3cda4afba62"",
+            ""actions"": [
+                {
+                    ""name"": ""AdvanceDialog"",
+                    ""type"": ""Button"",
+                    ""id"": ""69472bf3-f732-4b91-a4f7-d9529dd39218"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ec7ba29c-a0cd-4d1e-b078-38cd633ba6d3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""AdvanceDialog"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -523,6 +550,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_MoveInventoryCursor = m_Inventory.FindAction("MoveInventoryCursor", throwIfNotFound: true);
+        // Intro
+        m_Intro = asset.FindActionMap("Intro", throwIfNotFound: true);
+        m_Intro_AdvanceDialog = m_Intro.FindAction("AdvanceDialog", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -764,6 +794,39 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public InventoryActions @Inventory => new InventoryActions(this);
+
+    // Intro
+    private readonly InputActionMap m_Intro;
+    private IIntroActions m_IntroActionsCallbackInterface;
+    private readonly InputAction m_Intro_AdvanceDialog;
+    public struct IntroActions
+    {
+        private @InputMaster m_Wrapper;
+        public IntroActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AdvanceDialog => m_Wrapper.m_Intro_AdvanceDialog;
+        public InputActionMap Get() { return m_Wrapper.m_Intro; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(IntroActions set) { return set.Get(); }
+        public void SetCallbacks(IIntroActions instance)
+        {
+            if (m_Wrapper.m_IntroActionsCallbackInterface != null)
+            {
+                @AdvanceDialog.started -= m_Wrapper.m_IntroActionsCallbackInterface.OnAdvanceDialog;
+                @AdvanceDialog.performed -= m_Wrapper.m_IntroActionsCallbackInterface.OnAdvanceDialog;
+                @AdvanceDialog.canceled -= m_Wrapper.m_IntroActionsCallbackInterface.OnAdvanceDialog;
+            }
+            m_Wrapper.m_IntroActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @AdvanceDialog.started += instance.OnAdvanceDialog;
+                @AdvanceDialog.performed += instance.OnAdvanceDialog;
+                @AdvanceDialog.canceled += instance.OnAdvanceDialog;
+            }
+        }
+    }
+    public IntroActions @Intro => new IntroActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -796,5 +859,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
     public interface IInventoryActions
     {
         void OnMoveInventoryCursor(InputAction.CallbackContext context);
+    }
+    public interface IIntroActions
+    {
+        void OnAdvanceDialog(InputAction.CallbackContext context);
     }
 }

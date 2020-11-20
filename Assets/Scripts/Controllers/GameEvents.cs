@@ -7,7 +7,6 @@ using UnityEngine;
 public class GameEvents : MonoBehaviour
 {
     public static GameEvents current;
-    public GameManager Manager;
     // Start is called before the first frame update
     void Awake()
     {
