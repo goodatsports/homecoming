@@ -29,7 +29,7 @@ public class PointerController : MonoBehaviour
         Sprite.enabled = false;
     }
 
-    void LateUpdate()
+    void Update()
     {
         MousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         MouseAngle = GetMouseAngle(MousePos);
@@ -76,11 +76,11 @@ public class PointerController : MonoBehaviour
 
     public void Show()
     {
-        Sprite.enabled = true;
+        ActionQuadrant.Show();
     }
 
     public void Hide()
     {
-        Sprite.enabled = false;
+        ActionQuadrant.Hide();
     }
 }

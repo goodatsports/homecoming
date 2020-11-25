@@ -8,8 +8,7 @@ using JetBrains.Annotations;
 public class MapController : MonoBehaviour
 {
     public GridLayout Map;
-    public GameObject DamageTextPrefab;
-    public Animation DamageAnimation;
+    public GameObject TreePrefab;
 
 
     [SerializeField]
@@ -70,37 +69,26 @@ public class MapController : MonoBehaviour
         foreach (Vector3Int pos in ObstacleMap.cellBounds.allPositionsWithin) {
             TreeTile possibleTile = ObstacleMap.GetTile<TreeTile>(pos);
             if (possibleTile != null) {
-                GameObject go = new GameObject("Tree");
+                GameObject go = Instantiate(TreePrefab, CellToWorld(pos) + TILE_OFFSET, Quaternion.identity);
                 go.transform.parent = TreesContainer.transform;
 
-                TreeController newTree = go.AddComponent<TreeController>();
-                newTree.transform.position = CellToWorld(pos) + TILE_OFFSET;
-                newTree.Tile = ScriptableObject.CreateInstance<Tile>();
+                // Place object on Character layer
+                go.layer = 8;
 
+                TreeController newTree = go.GetComponent<TreeController>();
+                newTree.Tile = ScriptableObject.CreateInstance<Tile>();
                 TreeMap[pos] = newTree;
 
             }
         }
-        DamageAnimation = DamageTextPrefab.GetComponent<Animation>();
 
     }
 
     public void ChopTree(Vector3Int address)
     {
-        TreeController target = TreeMap[address];
-
-        if (target != null) {
-            target.Hit(DamageTextPrefab);
-        }
-        else return;
-
-        // If tree has no health, remove tile
-        if (target.Dead()) {
-            GameEvents.current.TreeChopped();
-            ObstacleMap.SetTile(address, null);
-            TreeMap[address] = null;
-            target.Destroy();
-        }
+        GameEvents.current.TreeChopped();
+        ObstacleMap.SetTile(address, null);
+        TreeMap[address] = null;
     }
 
     public void PaintRope(Vector3Int address, Vector3 dir) {

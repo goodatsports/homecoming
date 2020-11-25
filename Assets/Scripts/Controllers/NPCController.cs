@@ -27,6 +27,7 @@ public class NPCController : Interactable
     public MapController Map;
     public Vector3 Destination;
     public bool DoesRoam = false;
+    public int RoamRange = 2;
 
     public Queue<Dialog> RecurringDialog;
     protected Stack<NPCStates> States;
@@ -39,7 +40,7 @@ public class NPCController : Interactable
 
     // Used to offset timing for moving tiles for each NPC
     public float TimingOffset;
-    protected float minTiming = 0.5f;
+    protected float minTiming = 0.75f;
     protected float maxTiming = 3f;
     private Vector3 OFFSET_VECTOR = new Vector3(0.5f, 0.5f, 0);
 
@@ -54,7 +55,7 @@ public class NPCController : Interactable
         Map = GameObject.Find("Map").GetComponent<MapController>();
         DialogController = GameObject.Find("Dialog Controller").GetComponent<DialogController>();
         Home = transform.position;
-        MaxDistance = new Vector3(2f, 2f);
+        MaxDistance = new Vector3((float)RoamRange, (float)RoamRange);
 
         if (DoesRoam) States.Push(NPCStates.Walking); 
             else States.Push(NPCStates.Standing);
@@ -76,8 +77,8 @@ public class NPCController : Interactable
     }
 
     protected void SetDestination() {
-        float newX = (int)(Home.x + UnityEngine.Random.Range(-2f, 2f)) + 0.5f;
-        float newY = (int)(Home.y + UnityEngine.Random.Range(-2f, 2f)) + 0.5f;
+        float newX = (int)(Home.x + UnityEngine.Random.Range(-1 * (float)RoamRange, (float)RoamRange)) + OFFSET_VECTOR.x;
+        float newY = (int)(Home.y + UnityEngine.Random.Range(-1 * (float)RoamRange, (float)RoamRange)) + OFFSET_VECTOR.y;
 
         Destination = new Vector3(newX, newY, Home.z);
     }
@@ -181,19 +182,16 @@ public class NPCController : Interactable
 
     protected void AdvanceDialog() {
         if (!Interacting) {
-           // print("Advance Dialog: first interaction");
             Interacting = true;
             GameEvents.current.NPCDialogStart();
             DialogController.StartDialog(Dialog);
         }
         else if (DialogController.HasSentences) {
             DialogController.DisplayNextSentence();
-          //  print("Advance Dialog: next sentence");
 
         }
         if (!DialogController.HasSentences) {
             Interacting = false;
-           // print("popping state");
             PopState();
         }
     }
@@ -203,24 +201,4 @@ public class NPCController : Interactable
             StartCoroutine(Roam());
         }
     }
-
-    //public void Interact(Dialog newDialog) {
-    //    if (!Interacting) {
-    //        print("NPC controller: first interaction");
-    //        Interacting = true;
-    //        GameEvents.current.NPCDialogStart();
-    //        DialogController.StartDialog(newDialog);
-    //    }
-    //    else if (DialogController.HasSentences) {
-    //        DialogController.DisplayNextSentence();
-    //        print("NPC controller: next sentence");
-
-    //    }
-    //    if (!DialogController.HasSentences) {
-    //        print("NPC controller: end dialog");
-
-    //        Interacting = false;
-    //        GameEvents.current.NPCDialogEnd();
-    //    }
-    //}
 }

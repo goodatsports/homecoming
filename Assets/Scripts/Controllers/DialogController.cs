@@ -21,7 +21,7 @@ public class DialogController : MonoBehaviour
     public TextMeshPro dialogText;
     public ChoiceController Choices;
     public Animator animator;
-    public AudioClip sound;
+    public AudioSource SFX;
     private AudioSource source { get { return GetComponent<AudioSource>(); } }
 
     public InputMaster Controls;
@@ -67,7 +67,9 @@ public class DialogController : MonoBehaviour
 
     void PlaySound()
     {
-        source.PlayOneShot(sound);
+        if (!SFX.isPlaying) {
+            SFX.Play();
+        }
     }
 
     // Used to play one-shot dialog without interrupting current Dialog structure
@@ -88,10 +90,6 @@ public class DialogController : MonoBehaviour
         HasSentences = true;
         Textbox.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f + 0.2f, CAMERA_Z_OFFSET));
         Textbox.SetActive(true);
-
-        // gameObject.AddComponent<AudioSource>();
-        //source.clip = sound;
-        //source.playOnAwake = false;
         nameText.text = dialog.name;
         sentences.Clear();
 
@@ -169,7 +167,7 @@ public class DialogController : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             dialogText.text += letter;
-           // PlaySound();
+            PlaySound();
             yield return new WaitForSeconds(TYPING_SPEED);
         }
         isTyping = false;
@@ -181,7 +179,7 @@ public class DialogController : MonoBehaviour
         StopAllCoroutines();
         Textbox.SetActive(false);
         HasSentences = false;
-        //animator.SetBool("IsOpen", false);
+        GameEvents.current.NPCDialogEnd();
     }
 
 }

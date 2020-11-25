@@ -26,10 +26,12 @@ public class PlayerController : MonoBehaviour
 	public PointerController Pointer;
 	public InventoryController Inventory;
 	
-
 	private MapController Map;
 	private Tilemap GroundMap, ObstacleMap;
+
 	private Vector3 ActionQuadrant;
+	public TargetController TargetUI;
+	public Interactable Target;
 
 	[SerializeField]
 	public bool CanMove = true;
@@ -37,7 +39,10 @@ public class PlayerController : MonoBehaviour
 	private bool MoveActionHeld = false;
 
 	private Vector3 OFFSET_VECTOR = new Vector3(0.5f, 0.5f, 0);
-	private Vector3[] DirectionVectors = { Vector3.right, Vector3.up, Vector3.left, Vector3.down };
+	private List<Vector3> DirectionVectors = new List<Vector3>() {
+		Vector3.right, Vector3.up, Vector3.left, Vector3.down
+	};
+
 	private Vector2 DirectionInput;
 	private const float MOVE_DECAY = .125f;
 	private const float ROPE_DECAY = .075f;
@@ -74,7 +79,7 @@ public class PlayerController : MonoBehaviour
 		};
 
 		UseAction.started += ctx => { Interact(); };
-		SwingAction.started += ctx => { SwingAxe(); };
+		SwingAction.started += ctx => {  };
 
 		RopeAction.started += ctx => {
 			if (CanRope) {
@@ -115,6 +120,11 @@ public class PlayerController : MonoBehaviour
 	void Update() {
 		DirectionInput = MovementAction.ReadValue<Vector2>();
 		ActionQuadrant = Pointer.GetMouseQuadrant();
+
+		if (MovementAction.enabled) {
+			UpdateTarget();
+		}
+
 		if (MoveActionHeld && CanMove && DirectionInput != Vector2.zero) {
 			StartCoroutine(Move(DirectionInput));
 
@@ -186,27 +196,50 @@ public class PlayerController : MonoBehaviour
 
 	public void Interact()
     {
+		if (Target != null) {
+			Target.Interact();
+        }	
+    }
+
+	private Interactable GetTarget() {
+
 		//Layer mask; only looking for hits on character layer.
 		int characterLayer = 1 << 8;
 
-		foreach (Vector3 dir in DirectionVectors) {
-			RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, 1f, characterLayer);
-			if (hit.collider) {
-				Interactable target = hit.collider.GetComponent<Interactable>();
-				if (target != null) {
-					target.Interact();
-				}
-				return;
+		// First check current action direction for hits
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, ActionQuadrant, 1f, characterLayer);
+		if (hit.collider) {
+			Interactable possibleTarget = hit.collider.GetComponent<Interactable>();
+			if (possibleTarget != null) {
+				return possibleTarget;
 			}
 		}
-    }
 
-	public void SwingAxe()
-    {
-        var tileAddress = Map.WorldToCell(transform.position + ActionQuadrant);
-		CustomTile tile = ObstacleMap.GetTile<TreeTile>(tileAddress);
-		if (tile != null) Map.ChopTree(tileAddress);
-    }
+		// If no targets found in current action direction, check all other directions
+		foreach(Vector3 dir in DirectionVectors) {
+			if (dir != ActionQuadrant) {
+				hit = Physics2D.Raycast(transform.position, dir, 1f, characterLayer);
+				if (hit.collider) {
+					Interactable possibleTarget = hit.collider.GetComponent<Interactable>();
+					if (possibleTarget != null) {
+						return possibleTarget;
+					}
+				}
+			}
+        }
+		return null;
+	}
+
+	private void UpdateTarget() {
+		Target = GetTarget();
+
+		if (Target != null) {
+			TargetUI.transform.position = Target.transform.position;
+			TargetUI.Show();
+		}
+		else TargetUI.Hide();
+
+	}
 
 	void ThrowRope() {
 		int ropeLength = 5;
@@ -300,7 +333,7 @@ public class PlayerController : MonoBehaviour
 		yield return new WaitForSeconds(0.1f);
 	}
 
-	// Reset flags for taking movement and using rope after a delay
+	// Reset flags for taking movement and rope input after a delay
 	IEnumerator ResetInputFlags() {
 		yield return new WaitForSeconds(ROPE_DECAY);
 		MovementAction.Enable();

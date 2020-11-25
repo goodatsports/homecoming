@@ -14,6 +14,7 @@ public class ActionQuadrantController : MonoBehaviour
     {
         Pointer = GameObject.Find("Pointer").GetComponent<PointerController>();
         Arrows = gameObject.GetComponentsInChildren<SpriteRenderer>();
+        Hide();
     }
 
     public void SetActiveQuadrant(Vector3 dir)
@@ -39,6 +40,18 @@ public class ActionQuadrantController : MonoBehaviour
             }
         }
         Arrows[(int)activeQuadrant].color = Color.cyan;
+    }
+
+    public void Show() {
+        for (int i = 0; i < Arrows.Length; i++) {
+            Arrows[i].enabled = true;
+        }
+    }
+
+    public void Hide() {
+        for (int i = 0; i < Arrows.Length; i++) {
+            Arrows[i].enabled = false;
+        }
     }
 
     // Update is called once per frame

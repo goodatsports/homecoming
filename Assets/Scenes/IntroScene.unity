@@ -155,6 +155,14 @@ MonoBehaviour:
   TextboxUI: {fileID: 6462456942474772087}
   Background: {fileID: 6462456942474772075}
   DialogControl: {fileID: 6462456943390158540}
+  DialogAdvance:
+    m_Name: Dialog Advance
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8d6e0e87-048f-44f3-9ac8-afea89a7680e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
   IntroDialog:
     name: 
     sentences:
@@ -166,8 +174,16 @@ MonoBehaviour:
     - Content: "eyyy lmao fdsljaflkdsjalfkdsaj \nfdklajfdlskjkffjfjfjjfjfjfj\nskl;ajflkdsajfldsja;lfdjks\nfkldsajflkdsjalkfjdsa\nfjda;'jfl;dsajkf\nejaahahahflsdk\nfjdsalkfjdls;ajl;fsd"
       hasChoice: 0
       SentenceChoice:
-        Options: []
-        Responses: []
+        Options:
+        - ' '
+        - ' '
+        Responses:
+        - String: ' '
+          HasEvent: 1
+          EventId: 4
+        - String: ' '
+          HasEvent: 1
+          EventId: 4
 --- !u!4 &241611066
 Transform:
   m_ObjectHideFlags: 0
@@ -354,6 +370,133 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1697933860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1697933861}
+  - component: {fileID: 1697933862}
+  m_Layer: 5
+  m_Name: SFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1697933861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697933860}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6462456943078847109}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1697933862
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697933860}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 96dede93e8a478f4697c2eba5b66c885, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!23 &4172509484659155584
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -896,6 +1039,7 @@ Transform:
   - {fileID: 6462456943390158541}
   - {fileID: 6462456942474772075}
   - {fileID: 6718987617971061337}
+  - {fileID: 1697933861}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -938,7 +1082,7 @@ MonoBehaviour:
   dialogText: {fileID: 6462456942473096313}
   Choices: {fileID: 6718987617971061336}
   animator: {fileID: 0}
-  sound: {fileID: 0}
+  SFX: {fileID: 1697933862}
   CursorMove:
     m_Name: Cursor Move
     m_Type: 0

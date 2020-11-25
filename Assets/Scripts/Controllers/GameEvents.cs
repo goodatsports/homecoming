@@ -72,6 +72,9 @@ public class GameEvents : MonoBehaviour
                 onShoppingItemBuyNo?.Invoke();
                 print("ITEM SELL MESSAGE");
                 break;
+            case 4:
+                print("GAME START");
+                break;
             case 0:
                 break;
         }

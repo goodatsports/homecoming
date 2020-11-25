@@ -4,49 +4,45 @@ using UnityEngine.Tilemaps;
 using UnityEngine;
 using TMPro;
 
-public class TreeController : MonoBehaviour
+public class TreeController : Interactable
 {
     public int Health;
     public Tile Tile;
-    private GameObject DamageTextUI;
+    public MapController Map;
+    public GameObject DamageTextPrefab;
+    public BoxCollider2D Collider;
 
     void OnEnable() {
         Health = 3;
+        Map = GameObject.Find("Map").GetComponentInChildren(typeof(MapController)) as MapController;
         //DamageUI = Instantiate(TextPrefab, transform).GetComponent<TextMeshPro>();
         //DamageUI.text = Health.ToString();
     }
 
-    public void Hit(GameObject DamagePrefab) {
+    public override void Interact() {
+        Hit();
+    }
+
+    public void Hit() {
         Health--;
-        //DamageUI.text = Health.ToString();
-       Instantiate(DamagePrefab, transform);
+        Instantiate(DamageTextPrefab, transform);
+        if (Health == 0) {
+            StartCoroutine(Dead());
+        }
     }
 
-    private void AnimateDamage() {
-        //float StartTime = Time.time;
-        //float CurrentTime = Time.time;
-        //float StartPos = DamageUI.transform.position.y;
-        //float EndPos = StartPos + 1f;
-        //while (CurrentTime < StartTime + 10) {
-        //    print("animate");
-        //    float yPos = Mathf.Lerp(StartPos, EndPos, (StartTime + 10) - CurrentTime / StartTime);
-        //    DamageUI.transform.position = new Vector3(DamageUI.transform.position.x, yPos, DamageUI.transform.position.z);
-        //    CurrentTime += Time.deltaTime;
-        //}
-    }
-
-    public bool Dead() {
-        if (Health == 0) return true;
-        else return false;
+    public IEnumerator Dead() {
+        Vector3Int address = Map.WorldToCell(transform.position);
+        Map.ChopTree(address);
+        
+        // Delete collider immediately, wait for damage animation to finish then destroy self
+        Destroy(Collider);
+        yield return new WaitForSeconds(0.25f);
+        Destroy(gameObject);
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update() {
 
-    public void Destroy() {
-        Destroy(gameObject);
     }
 }

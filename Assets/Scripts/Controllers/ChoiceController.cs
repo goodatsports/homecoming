@@ -33,6 +33,7 @@ public class ChoiceController : MonoBehaviour
         initialPointerPos = Pointer.transform.position;
         Choice1.text = choice.Options[0];
         Choice2.text = choice.Options[1];
+
         // wait for user to confirm choice
         print("decision: " + Decision);
         yield return new WaitUntil(() => Decision > -1);
@@ -45,8 +46,8 @@ public class ChoiceController : MonoBehaviour
     }
 
     public void Confirm() {
-        // while no player.Confirm input, wait
-        // when player.Confirm input detected, set Decision field
+        // while no player Confirm input, wait
+        // when Confirm input detected, set Decision field
         Decision = ChoiceSelect;
         print("decision in confirm after assignment: " + Decision);
 

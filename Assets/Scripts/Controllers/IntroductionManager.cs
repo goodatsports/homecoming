@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class IntroductionManager : MonoBehaviour
@@ -11,11 +12,18 @@ public class IntroductionManager : MonoBehaviour
     public InputMaster Controls;
     public InputAction DialogAdvance;
 
+    private int nextScene;
 
     [SerializeField]
     public Dialog IntroDialog;
     void Awake() {
         Controls = new InputMaster();
+        nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+
+        //Event subscription for end of intro dialog
+        GameEvents.current.onNPCDialogEnd += StartGame;
+
+
         DialogAdvance = Controls.Intro.AdvanceDialog;
         DialogAdvance.started += ctx => { AdvanceDialog(); };
 
@@ -32,8 +40,13 @@ public class IntroductionManager : MonoBehaviour
         StartCoroutine(StartIntro());
     }
 
+    void StartGame() {
+        //GameEvents.current.onNPCDialogEnd -= StartGame;
+        SceneManager.LoadScene(nextScene);
+    }
+
     IEnumerator StartIntro() {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         DialogControl.StartDialog(IntroDialog);
     }
 
@@ -41,7 +54,6 @@ public class IntroductionManager : MonoBehaviour
         if (DialogControl.HasSentences) {
             DialogControl.DisplayNextSentence();
         }
-        else print("IT'S OVER, LOAD NEXT SCENE");
     }
 
     // Update is called once per frame
