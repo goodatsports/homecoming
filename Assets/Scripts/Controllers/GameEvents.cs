@@ -54,6 +54,12 @@ public class GameEvents : MonoBehaviour
     public event Action onShoppingItemBuyNo;
     public event Action onShoppingItemBuyYes;
 
+    public event Action onGilroyStoryEnd;
+    public event Action onGilroyStoryReset;
+
+    public event Action onAxeTrade;
+
+
     public void ShoppingEnd() {
         onShoppingEnd?.Invoke();
     }
@@ -74,6 +80,15 @@ public class GameEvents : MonoBehaviour
                 break;
             case 4:
                 print("GAME START");
+                break;
+            case 5:
+                onGilroyStoryEnd?.Invoke();
+                break;
+            case 6:
+                onGilroyStoryReset?.Invoke();
+                break;
+            case 7:
+                onAxeTrade?.Invoke();
                 break;
             case 0:
                 break;

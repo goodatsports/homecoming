@@ -74,8 +74,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1733229765
+  m_SortingLayer: 3
   m_SortingOrder: 5
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &4574415012276085886
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Worn, but sturdy and full of hewing potential
+  m_text: Worn but sturdy, full of hewing potential
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1396996189816040365}
   m_maskType: 0
-  _SortingLayerID: 0
+  _SortingLayerID: -1733229765
   _SortingOrder: 5
 --- !u!1 &4985126533942824055
 GameObject:
@@ -243,8 +243,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1733229765
+  m_SortingLayer: 3
   m_SortingOrder: 5
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2200808976860971290
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1.35
+  m_fontSize: 1.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1437018561874166517}
   m_maskType: 0
-  _SortingLayerID: 0
+  _SortingLayerID: -1733229765
   _SortingOrder: 5
 --- !u!1 &8332486764628675433
 GameObject:
@@ -406,8 +406,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1733229765
+  m_SortingLayer: 3
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 966a842a36982114585e1b0a6f50cb97, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -488,8 +488,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1733229765
+  m_SortingLayer: 3
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 836376e5174e8ff44bf6749a7a985eb4, type: 3}
   m_Color: {r: 0.07876467, g: 0.09433961, b: 0.09433961, a: 1}
@@ -549,6 +549,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36431c63f4d7ff94ea11c6a76df1e89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
+  Verb: 
+  ItemPrefab: {fileID: 0}
+  DialogController: {fileID: 0}
+  PickupDialog:
+    name: 
+    sentences: []
   ItemSprite: {fileID: 8332486764628675439}
-  Name: {fileID: 2200808976860971290}
+  NameUI: {fileID: 2200808976860971290}
   Description: {fileID: 4574415012276085886}

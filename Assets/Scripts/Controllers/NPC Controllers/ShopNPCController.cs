@@ -6,17 +6,21 @@ public class ShopNPCController : NPCController
 {
     public ShopController ShopController;
     public InventoryController Inventory;
+    public GameObject AxeOnTable;
+
     // Start is called before the first frame update
     protected override void Awake() {
         base.Awake();
-        GameEvents.current.onShoppingStart += Shop;
-        GameEvents.current.onShoppingEnd += OnShopClose;
+        //GameEvents.current.onShoppingStart += Shop;
+        //GameEvents.current.onShoppingEnd += OnShopClose;
+        GameEvents.current.onAxeTrade += TradeAxe;
 
     }
 
     protected override void OnStateChange() {
         if (States.Count == 1) {
             GameEvents.current.NPCDialogEnd();
+            if (!Inventory.HasItem("Axe")) SetPostTradeDialog();
             return;
         }
         else {
@@ -29,6 +33,17 @@ public class ShopNPCController : NPCController
                 AdvanceDialog();
             }
         }
+    }
+
+    public void TradeAxe() {
+        Inventory.RemoveItem("Axe");
+        AxeOnTable.SetActive(false);
+    }
+
+    public void SetPostTradeDialog() {
+        Dialog = new Dialog(new Sentence[] {
+            new Sentence("No refunds!") },
+            Name);
     }
 
     public void Shop() {
@@ -51,7 +66,6 @@ public class ShopNPCController : NPCController
 
     void OnShopClose() {
         PopState();
-        DialogController.AddDialog(new Dialog(new string[] { "Bye", "Binch" }, Name));
-
+        DialogController.AddDialog(new Dialog(new string[] { "Bye" }, Name));
     }
 }

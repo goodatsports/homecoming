@@ -24,14 +24,19 @@ public class PlayerController : MonoBehaviour
 		UseAction, SwingAction, RopeAction, ShowPointerAction, InventoryAction, 
 		DialogCursorAction, DialogConfirmAction;
 	public PointerController Pointer;
+	public TargetController TargetUI;
+	public Interactable Target;
 	public InventoryController Inventory;
+	public SpriteRenderer Sprite;
+
+	public Item AxePrefab;
+	public Sprite UnarmoredSprite;
 	
 	private MapController Map;
 	private Tilemap GroundMap, ObstacleMap;
 
 	private Vector3 ActionQuadrant;
-	public TargetController TargetUI;
-	public Interactable Target;
+	
 
 	[SerializeField]
 	public bool CanMove = true;
@@ -46,6 +51,7 @@ public class PlayerController : MonoBehaviour
 	private Vector2 DirectionInput;
 	private const float MOVE_DECAY = .125f;
 	private const float ROPE_DECAY = .075f;
+	private int ROPE_LENGTH = 5;
 
 
     #region Initialization
@@ -54,6 +60,7 @@ public class PlayerController : MonoBehaviour
 		Controls = new InputMaster();
 		Pointer = GameObject.Find("Pointer").GetComponent<PointerController>();
 		Inventory = GameObject.Find("Player Inventory").GetComponent<InventoryController>();
+		Sprite = gameObject.GetComponent<SpriteRenderer>();
 
 
 		// Input action mapping
@@ -82,7 +89,7 @@ public class PlayerController : MonoBehaviour
 		SwingAction.started += ctx => {  };
 
 		RopeAction.started += ctx => {
-			if (CanRope) {
+			if (CanRope && Inventory.HasItem("Rope")) {
 				MovementAction.Disable();
 				CanRope = false;
 				ThrowRope();
@@ -99,6 +106,7 @@ public class PlayerController : MonoBehaviour
 		GameEvents.current.onWaitForDialogChoice += WaitingOnDialogChoice;
 		GameEvents.current.onDialogChoiceMade += DialogChoiceMade;
 		GameEvents.current.onShoppingStart += Shopping;
+		GameEvents.current.onAxeTrade += TradeForAxe;
 
 
 	}
@@ -115,12 +123,14 @@ public class PlayerController : MonoBehaviour
 		GroundMap = Map.GroundMap;
 		ObstacleMap = Map.ObstacleMap;
 		Physics2D.queriesStartInColliders = false;
+
 	}
 
 	void Update() {
 		DirectionInput = MovementAction.ReadValue<Vector2>();
 		ActionQuadrant = Pointer.GetMouseQuadrant();
 
+		// Look for targets when able to move / not currently doing an action
 		if (MovementAction.enabled) {
 			UpdateTarget();
 		}
@@ -194,11 +204,30 @@ public class PlayerController : MonoBehaviour
 		CanMove = true;
 	}
 
+	public void TradeForAxe() {
+		Inventory.Clear();
+		Inventory.AddItem(AxePrefab);
+		Sprite.sprite = UnarmoredSprite;
+    }
+
 	public void Interact()
     {
 		if (Target != null) {
 			Target.Interact();
+			TargetUI.Hide();
         }	
+    }
+
+	public bool HasAxe() {
+		return Inventory.HasItem("Axe");
+    }
+
+	public bool HasRope() {
+		return Inventory.HasItem("Rope");
+    }
+
+	public bool HasTear() {
+		return Inventory.HasItem("Mountain Tear");
     }
 
 	private Interactable GetTarget() {
@@ -231,36 +260,41 @@ public class PlayerController : MonoBehaviour
 	}
 
 	private void UpdateTarget() {
+		string oldTarget = "";
+		if (Target != null) oldTarget = Target.name;
+
 		Target = GetTarget();
 
 		if (Target != null) {
 			TargetUI.transform.position = Target.transform.position;
+
+			// Update UI if new target
+			if (Target.name != oldTarget) {
+				TargetUI.UpdateTarget(Target);
+
+			}
 			TargetUI.Show();
 		}
-		else TargetUI.Hide();
-
+		else if (TargetUI.isVisible) TargetUI.Hide();
 	}
 
+	#region Rope Handling
+
 	void ThrowRope() {
-		int ropeLength = 5;
 		Vector3 direction = ActionQuadrant;
-		for (int i = 1; i <= ropeLength; i++) {
+		for (int i = 1; i <= ROPE_LENGTH; i++) {
 			Vector3Int targetTile = Map.WorldToCell(transform.position + direction * i);
 			
 			// If a ropeable target is hit, begin animating movement towards target
 			if (Map.HasRopeable(targetTile)) {
-				print("has ropeable!");
-				//StopAllCoroutines();
 				StartCoroutine(AnimateRopeMovement(targetTile, direction));
 				return;
 			}
 
 			// If rope hits obstacle, end rope state
 			if (Map.HasObstacle(targetTile)) {
-				print($"obstacle found at {targetTile}: {Map.ObstacleMap.GetTile(targetTile)}");
-
 				StartCoroutine(ResetInputFlags());
-				StartCoroutine(ClearRopeTiles(Map.WorldToCell(transform.position), direction, ropeLength));
+				StartCoroutine(ClearRopeTiles(Map.WorldToCell(transform.position), direction, ROPE_LENGTH));
 				return;
 			}
 
@@ -270,7 +304,7 @@ public class PlayerController : MonoBehaviour
 		}
 		// Rope went full distance without hitting a target, return player control and remove rope tiles
 		StartCoroutine(ResetInputFlags());
-		StartCoroutine(ClearRopeTiles(Map.WorldToCell(transform.position), direction, ropeLength));
+		StartCoroutine(ClearRopeTiles(Map.WorldToCell(transform.position), direction, ROPE_LENGTH));
 	}
 
 	IEnumerator AnimateRopeMovement (Vector3Int targetTile, Vector3 direction) {
@@ -300,8 +334,9 @@ public class PlayerController : MonoBehaviour
 			yield return new WaitForSeconds(0.1f);
         }
     }
+    #endregion
 
-	void MovePlayer(Vector2 input)
+    void MovePlayer(Vector2 input)
 	{
 		// Don't look for collisions on Trigger layer
 		int layerMask = ~(1 << 10);

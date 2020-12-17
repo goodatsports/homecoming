@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9100a849f6f533649bb02b8b35b8c0be, type: 3}
-  m_Name: Axe
+  m_Name: Mountain Tear
   m_EditorClassIdentifier: 
-  Name: Woodcutter's Axe
-  Description: Worn but sturdy, full of hewing potential
-  Value: 30
-  Sprite: {fileID: 21300000, guid: 966a842a36982114585e1b0a6f50cb97, type: 3}
+  Name: Mountain Tear
+  Description: Supposedly a flower, transluscent. Smells of cold mountain air.
+  Value: 0
+  Sprite: {fileID: 8693116918168130974, guid: b84eee8235bb62543bd6a3927236d987, type: 3}

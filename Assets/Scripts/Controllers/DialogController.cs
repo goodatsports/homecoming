@@ -79,7 +79,6 @@ public class DialogController : MonoBehaviour
 
         StartDialog(newDialog);
         yield return new WaitUntil(() => HasSentences == false);
-        print("End of AddDialog");
         //sentences = currentDialog;
 
     }
@@ -88,7 +87,7 @@ public class DialogController : MonoBehaviour
     {
         WorkingDialog = dialog;
         HasSentences = true;
-        Textbox.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.0f + 0.2f, CAMERA_Z_OFFSET));
+        Textbox.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.2f, CAMERA_Z_OFFSET));
         Textbox.SetActive(true);
         nameText.text = dialog.name;
         sentences.Clear();
@@ -106,7 +105,6 @@ public class DialogController : MonoBehaviour
         if (sentences.Count == 0 && !isTyping)
         {
             EndDialog();
-            print("ending dialog");
             return;
         }
 
@@ -125,7 +123,6 @@ public class DialogController : MonoBehaviour
                 PromptChoice(currentSentence.SentenceChoice);
             }
             StartCoroutine(TypeSentence(currentSentence.Content));
-            print("current sentence: " + currentSentence.Content);
         }
     }
 
@@ -148,13 +145,11 @@ public class DialogController : MonoBehaviour
     }
 
     void ResolveResponseEvent(Response response) {
-        EndDialog();
-        print("RESOLVE RESPONSE EVENT");
+        //EndDialog();
         GameEvents.current.DialogChoiceEvent(response.EventId);
     }
 
     void MoveCursor(float input) {
-        print("dialog cursor move: " + input);
         if (input > 0) Choices.Right();
         else Choices.Left();
     }
@@ -167,7 +162,7 @@ public class DialogController : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             dialogText.text += letter;
-            PlaySound();
+            if (!char.IsWhiteSpace(letter)) PlaySound();
             yield return new WaitForSeconds(TYPING_SPEED);
         }
         isTyping = false;
@@ -175,7 +170,6 @@ public class DialogController : MonoBehaviour
 
     public void EndDialog()
     {
-        print("end dialog called");
         StopAllCoroutines();
         Textbox.SetActive(false);
         HasSentences = false;

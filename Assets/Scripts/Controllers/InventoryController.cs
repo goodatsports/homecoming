@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class InventoryController : MonoBehaviour
 {
-    public Item[] Items;
+    public List<Item> Items;
     public ItemController ItemPrefab;
     public SpriteRenderer Pointer;
     public GameObject UI;
@@ -40,27 +40,17 @@ public class InventoryController : MonoBehaviour
         Pointer.enabled = false;
         Vector3 inventoryPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, CAMERA_Z_OFFSET));
         transform.position = inventoryPos;
-        int index = 0;
-
-        // Populate UI prefabs for each item
-        foreach (Item item in Items) {
-            ItemController itemUI = ItemPrefab;
-            itemUI.SetName(item.Name);
-            itemUI.SetDescription(item.Description);
-            itemUI.SetSprite(item.Sprite);
-            Vector3 itemPos = new Vector3(inventoryPos.x, inventoryPos.y + ITEM_UI_Y_OFFSET * index, inventoryPos.z);
-            ItemController newItem = Instantiate(itemUI, itemPos, Quaternion.identity);
-            newItem.transform.SetParent(UI.transform);
-            index++;
-        }
+        UpdateInventory();
+       
         // If inventory has items, set the active item to the first in the array
-        if (Items.Length > 0) {
+        if (Items.Count > 0) {
             activeItem = 0;
         }
 
     }
 
     void LateUpdate() {
+        // Oscillate pointer sprite y pos over time
         if (gameObject.activeSelf) { 
             float posY = Pointer.transform.position.y + Mathf.Sin(Time.time * 2f) * 0.0003f;
             Pointer.transform.position = new Vector3(Pointer.transform.position.x, posY);
@@ -72,7 +62,7 @@ public class InventoryController : MonoBehaviour
             activeItem--;
             Pointer.transform.position -= ITEM_UI_OFFSET_VECTOR;
         }
-        else if (input < 0 && activeItem < Items.Length - 1) {
+        else if (input < 0 && activeItem < Items.Count - 1) {
             activeItem++;
             Pointer.transform.position += ITEM_UI_OFFSET_VECTOR;
         }
@@ -106,16 +96,71 @@ public class InventoryController : MonoBehaviour
         Pointer.enabled = false;
 
     }
+    
+    //  Returns true if inventory contains item whose name is partial match to search string
+    public bool HasItem(string name) {
+        foreach (Item item in Items) {
+            if (item.name.Contains(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public void AddItem(Item newItem) {
+        Items.Add(newItem);
+        UpdateInventory();
+    }
+
+    public void RemoveItem(string itemName) {
+        Item toBeRemoved = null;
+        foreach (Item i in Items) {
+            if (i.name == itemName) {
+                toBeRemoved = i;
+                break;
+            }
+        }
+        if (toBeRemoved != null) {
+            
+            Items.Remove(toBeRemoved);
+            Destroy(UI.transform.Find(toBeRemoved.Name).gameObject);
+            UpdateInventory();
+        }
+    }
+
+    // Empty inventory
+    public void Clear() {
+        foreach (Item i in Items) {
+            Destroy(UI.transform.Find(i.Name).gameObject);
+        }
+        Items.Clear();
+        UpdateInventory();
+    }
+
+    public void UpdateInventory() {
+        Vector3 inventoryPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, CAMERA_Z_OFFSET));
+        int index = 0;
+
+        foreach (Item item in Items) {
+            ItemController itemUI = ItemPrefab;
+            itemUI.SetName(item.Name);
+            itemUI.SetDescription(item.Description);
+            itemUI.SetSprite(item.Sprite);
+            Vector3 itemPos = new Vector3(inventoryPos.x, inventoryPos.y + ITEM_UI_Y_OFFSET * index, inventoryPos.z);
+            ItemController newItem = Instantiate(itemUI, itemPos, Quaternion.identity,UI.transform);
+            newItem.name = item.Name;
+            index++;
+        }
+    }
 
     // Update to closest index'ed item in inventory given the index of another inventory's activeItem.
     // Called from ShopController when player moves between inventories and the pointer of inventory being moved into 
     // needs to be updated.
     public void SetActiveItem(int index) {
-        if (index < Items.Length - 1) {
+        if (index < Items.Count - 1) {
             activeItem = index;
         } else {
-            activeItem = Items.Length - 1;
+            activeItem = Items.Count - 1;
         }
         SetPointer();
     }
@@ -126,6 +171,15 @@ public class InventoryController : MonoBehaviour
 
     public Item GetActiveItemInfo() {
         return Items[activeItem];
+    }
+
+    public int GetItemIndex(string name) {
+        for(int i = 0; i < Items.Count; i++) {
+            if (Items[i].name == name) {
+                return i;
+            }
+        }
+        return -1;
     }
 
 
@@ -144,9 +198,6 @@ public class InventoryController : MonoBehaviour
         Pointer.enabled = true;
         transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, CAMERA_Z_OFFSET));
         initialPointerPos = Pointer.transform.position;
-        print("initial pointer pos: " + initialPointerPos);
-
-
     }
 
     void Close() {

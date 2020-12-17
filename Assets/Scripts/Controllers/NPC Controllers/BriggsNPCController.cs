@@ -28,11 +28,6 @@ public class BriggsNPCController : NPCController
 
     }
 
-    // Start is called before the first frame update
-    void Start() {
-        //InitialDialog = new Dialog(new string[] { "Hail", "Binch" }, Name);
-        //GameEvents.current.onCheckTreesChopped += CheckTreesProgress;
-    }
 
     bool CheckTreesProgress() {
         return Manager.AllTreesChopped();
