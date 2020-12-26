@@ -6,9 +6,11 @@ public class GharnamNPCController : NPCController
 {
     bool HadInitialConvo = false;
     bool HadMissionTurnInConvo = false;
+    bool HadFinalConvo = false;
     public Dialog InitialDialog;
     public Dialog WaitingOnItemDialog;
     public Dialog PostMissionDialog;
+    public Dialog FinalDialog;
     public Item MountainTearPrefab;
     public PlayerController Player;
     protected override void Awake() {
@@ -19,8 +21,12 @@ public class GharnamNPCController : NPCController
     public override void Interact() {
         if (Player.HasTear() && !HadMissionTurnInConvo) {
             Dialog = PostMissionDialog;
-            HadMissionTurnInConvo = true;
         }
+
+        if (HadMissionTurnInConvo) {
+            Dialog = FinalDialog;
+        }
+
         base.Interact();
     }
 
@@ -30,7 +36,8 @@ public class GharnamNPCController : NPCController
             if (!HadInitialConvo) {
                 HadInitialConvo = true;
                 Dialog = WaitingOnItemDialog;
-            }
+            } 
+            if (Dialog == PostMissionDialog) HadMissionTurnInConvo = true;
             return;
         }
         else {

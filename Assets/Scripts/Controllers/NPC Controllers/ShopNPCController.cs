@@ -11,8 +11,7 @@ public class ShopNPCController : NPCController
     // Start is called before the first frame update
     protected override void Awake() {
         base.Awake();
-        //GameEvents.current.onShoppingStart += Shop;
-        //GameEvents.current.onShoppingEnd += OnShopClose;
+        
         GameEvents.current.onAxeTrade += TradeAxe;
 
     }

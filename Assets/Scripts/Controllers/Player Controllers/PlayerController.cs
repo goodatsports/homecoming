@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 	public SpriteRenderer Sprite;
 
 	public Item AxePrefab;
+	public Item RopePrefab;
 	public Sprite UnarmoredSprite;
 	
 	private MapController Map;
@@ -90,6 +91,7 @@ public class PlayerController : MonoBehaviour
 
 		RopeAction.started += ctx => {
 			if (CanRope && Inventory.HasItem("Rope")) {
+				UseAction.Disable();
 				MovementAction.Disable();
 				CanRope = false;
 				ThrowRope();
@@ -107,6 +109,7 @@ public class PlayerController : MonoBehaviour
 		GameEvents.current.onDialogChoiceMade += DialogChoiceMade;
 		GameEvents.current.onShoppingStart += Shopping;
 		GameEvents.current.onAxeTrade += TradeForAxe;
+		GameEvents.current.onGharnamQuestComplete += GetRope;
 
 
 	}
@@ -203,6 +206,10 @@ public class PlayerController : MonoBehaviour
 		yield return new WaitForSeconds(MOVE_DECAY);
 		CanMove = true;
 	}
+
+	public void GetRope() {
+		Inventory.AddItem(RopePrefab);
+    }
 
 	public void TradeForAxe() {
 		Inventory.Clear();
@@ -372,6 +379,7 @@ public class PlayerController : MonoBehaviour
 	IEnumerator ResetInputFlags() {
 		yield return new WaitForSeconds(ROPE_DECAY);
 		MovementAction.Enable();
+		UseAction.Enable();
 		CanRope = true;
 		yield return null;
     }

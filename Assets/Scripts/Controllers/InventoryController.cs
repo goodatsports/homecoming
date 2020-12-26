@@ -12,6 +12,7 @@ public class InventoryController : MonoBehaviour
     public GameObject UI;
     public InputMaster Controls;
     public InputAction MoveInventoryCursor;
+    public bool HasPointer = false;
 
     private int activeItem = int.MaxValue;
     private Vector3 initialPointerPos;
@@ -37,7 +38,7 @@ public class InventoryController : MonoBehaviour
         ITEM_UI_OFFSET_VECTOR = new Vector3(0, ITEM_UI_Y_OFFSET);
         UI = transform.Find("UI").gameObject;
         gameObject.SetActive(false);
-        Pointer.enabled = false;
+        if (HasPointer) Pointer.enabled = false;
         Vector3 inventoryPos = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, CAMERA_Z_OFFSET));
         transform.position = inventoryPos;
         UpdateInventory();
@@ -50,10 +51,12 @@ public class InventoryController : MonoBehaviour
     }
 
     void LateUpdate() {
-        // Oscillate pointer sprite y pos over time
-        if (gameObject.activeSelf) { 
-            float posY = Pointer.transform.position.y + Mathf.Sin(Time.time * 2f) * 0.0003f;
-            Pointer.transform.position = new Vector3(Pointer.transform.position.x, posY);
+        if (HasPointer && Pointer.enabled) {
+            // Oscillate pointer sprite y pos over time
+            if (gameObject.activeSelf) {
+                float posY = Pointer.transform.position.y + Mathf.Sin(Time.time * 2f) * 0.0003f;
+                Pointer.transform.position = new Vector3(Pointer.transform.position.x, posY);
+            }
         }
     }
 

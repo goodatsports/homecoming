@@ -1384,6 +1384,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_PrefabInstance: {fileID: 799537644}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &311418590 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
+  m_PrefabInstance: {fileID: 1956360817}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &311418595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311418590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420d4f8142349514e87fe1d603675fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Gravestone
+  Verb: Read
+  Dialog:
+    name: 
+    sentences: []
+  DialogController: {fileID: 0}
+  Map: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  DoesRoam: 0
+  RoamRange: 2
+  TimingOffset: 0
+  DefaultDialog:
+    name: Gravestone
+    sentences:
+    - Content: "\t\t         Orrina Lasmin\n   Councilor of the People's Estate,
+        Old Citadel Valley\n\t                   Honorary Hydra\n\n\t\t    K.E. 885 
+        -  K.E. 843"
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: 'Perished in the Siege of the Old Citadel
+
+        A Neighbor In Peace
+        and Conflict,
+
+        A Champion of The Valley and Its People
+
+        Forever
+        a Hydra, In This World and The Next '
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+  PlayerHasTearDialog:
+    name: 
+    sentences: []
+  GraveHasTearDialog:
+    name: 
+    sentences: []
+  Player: {fileID: 210921347}
 --- !u!4 &325605021 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6462456942510693867, guid: 4661bf5ff264e9d41b2a0e6ce1212eb6, type: 3}
@@ -1537,6 +1595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc207f4906eafb49ba33bdb8b0f049a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
   Verb: 
 --- !u!212 &349572761
 SpriteRenderer:
@@ -1906,6 +1965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36431c63f4d7ff94ea11c6a76df1e89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
   Verb: 
   ItemPrefab: {fileID: 11400000, guid: 24ecec0370ee0fb4f8379c3616c75c31, type: 2}
   DialogController: {fileID: 1444564}
@@ -1913,7 +1973,7 @@ MonoBehaviour:
     name: 
     sentences: []
   ItemSprite: {fileID: 0}
-  Name: {fileID: 0}
+  NameUI: {fileID: 0}
   Description: {fileID: 0}
 --- !u!212 &401816251
 SpriteRenderer:
@@ -2120,8 +2180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627970bb98e3ea043a1710f423f378d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Verb: 
   Name: Briggs
+  Verb: 
   Dialog:
     name: 
     sentences: []
@@ -2550,7 +2610,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 49
-      m_TileSpriteIndex: 49
+      m_TileSpriteIndex: 51
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -3270,7 +3330,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 40
-      m_TileSpriteIndex: 48
+      m_TileSpriteIndex: 49
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -3531,7 +3591,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 39
-      m_TileSpriteIndex: 39
+      m_TileSpriteIndex: 48
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -6053,15 +6113,6 @@ Tilemap:
       m_TileIndex: 11
       m_TileSpriteIndex: 9
       m_TileMatrixIndex: 2
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: 1, y: 6, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 51
-      m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
@@ -8769,8 +8820,8 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: ee2b0f4fc531cc94a8111618c8eb1b7d, type: 2}
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: ecdb9a956eac05545a10dffce7f761bf, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 3fb37621b04a5bf489cd3c8c33f411d8, type: 2}
   - m_RefCount: 3
@@ -9002,8 +9053,8 @@ Tilemap:
     m_Data: {fileID: 9017094608050048039, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: 3926692716954254205, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 7102371912505825836, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: 1586003287736387329, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 4
@@ -9021,13 +9072,13 @@ Tilemap:
   - m_RefCount: 8
     m_Data: {fileID: 21300000, guid: 7bb99aefe767b87478242b6b18dfd740, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 8072481189927687812, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
+    m_Data: {fileID: 7102371912505825836, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 5927941258384097353, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
+    m_Data: {fileID: 8072481189927687812, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 132248588588835206, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 1744793458102920976, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
+    m_Data: {fileID: 5927941258384097353, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 1395886314919809807, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 1
@@ -9077,7 +9128,7 @@ Tilemap:
   - m_RefCount: 2
     m_Data: {fileID: 8466387638493080593, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 566
+  - m_RefCount: 565
     m_Data:
       e00: 1
       e01: 0
@@ -9206,7 +9257,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 2.316e-41, g: 2.316e-41, b: 2.316e-41, a: 2.316e-41}
-  - m_RefCount: 715
+  - m_RefCount: 714
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 0
     m_Data: {r: 5.25207e-40, g: 5.25207e-40, b: 5.25207e-40, a: 5.25207e-40}
@@ -9481,8 +9532,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150a16fb43df2ac4badefa3d0e41cde5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Verb: 
   Name: Gharnam
+  Verb: 
   Dialog:
     name: 
     sentences: []
@@ -9495,12 +9546,69 @@ MonoBehaviour:
   InitialDialog:
     name: Gharnam
     sentences:
-    - Content: Aye, can I help you?
+    - Content: Come to visit the mighty Gharnam, maestro of the tightrope, Lion King
+        of the Eastern Isles?
+      hasChoice: 1
+      SentenceChoice:
+        Options:
+        - No, not really
+        - Yes, absolutely
+        Responses:
+        - String: You pain an old man's ego, but I know you would not be talking
+            to me otherwise!
+          HasEvent: 0
+          EventId: 0
+        - String: Always a pleasure to meet a fan. Unfortunately, I am out of signed
+            daguerreotypes to sell.
+          HasEvent: 0
+          EventId: 0
+    - Content: 'Well, in any case, I gather you''re looking for a way across this
+        awful moat. Back to the energy and glow of the capital and its beautiful
+        people. '
       hasChoice: 0
       SentenceChoice:
         Options: []
         Responses: []
-    - Content: sdagfd
+    - Content: The heat of the spotlight and three hundred pairs of eyes on you...
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: ...
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: 'Ah, forgive me. Better times, those. '
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: I will tell you this, traveler.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: There is a rare, beautiful flower native to this land called the Mountain
+        Tear.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: I have heard there is a secret grove near the village that has all
+        of the conditions needed to grow one of these Tears.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: I am an old man now, without the tools or drive to follow such a rumor.
+        But you...
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: If you can bring me this flower, I will offer you something to aid
+        in traversing the moat.
       hasChoice: 0
       SentenceChoice:
         Options: []
@@ -9508,7 +9616,12 @@ MonoBehaviour:
   WaitingOnItemDialog:
     name: Gharnam
     sentences:
-    - Content: 'where da tear at '
+    - Content: No luck yet, traveler?
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: Look around the village, surely someone knows of this hidden grove.
       hasChoice: 0
       SentenceChoice:
         Options: []
@@ -9516,7 +9629,136 @@ MonoBehaviour:
   PostMissionDialog:
     name: Gharnam
     sentences:
-    - Content: Tear had
+    - Content: Is that...?
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: My, it's even more beautiful than the illustrations.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: You've warmed this performer's tired heart, traveler.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: For that, I will teach you the secrets of my esoteric craft, Artisanal
+        Ropewalking.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: Many a duke would send a herald, sealed parchment in hand, across
+        the sealands to request a performance by my troupe.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: 'It was a wonderful time, then. '
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: Now, in our age of imperialism and mechanical reproduction, the dukes
+        are all dead and my joints cannot handle the deft maneuvers I have spent
+        decades perfecting.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: I will pass on my skills to you as best I can, on one condition.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: Across the flooded lowlands to the West, there is a militia graveyard.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: There was a woman among them, a beautiful and strong warrior who was
+        my neighbor and protector during the war.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: As if to cosmically humilate me, I have forgotten her name in my later
+        days, though I see her face in my dreams often.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: Find her gravestone and place the flower in front of it. Think of
+        it as a parting favor for an old man.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: Will you do this for me?
+      hasChoice: 1
+      SentenceChoice:
+        Options:
+        - I will.
+        - I will try.
+        Responses:
+        - String: Thank you, friend. You've warmed my heart yet again.
+          HasEvent: 1
+          EventId: 8
+        - String: I suppose that is all I can ask for.
+          HasEvent: 1
+          EventId: 8
+    - Content: Now let me condense my decades of experience into a transmittable
+        whisper...
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: ...
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: ...
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: (Take this rope. Press Left Click to throw it in the direction of
+        your mouse cursor.)
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: (If the rope catches something grippable in its grasp, it will grow
+        taut and pull you towards it.)
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: And that is pretty much all there is to it. Use this knowledge to
+        traverse the flooded lowlands to the west. The elgrove trees that grow wild
+        there are exceptionally grippy and may provide a useful asset in your journey.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: Now go traveler, may you fly gracefully over the land and find your
+        way across this ruined city. And please remember what I have asked of you!
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+  FinalDialog:
+    name: Gharnam
+    sentences:
+    - Content: Good luck on your journey, traveler.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: May my skills help you on your way.
       hasChoice: 0
       SentenceChoice:
         Options: []
@@ -9682,7 +9924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.43, y: 20.4, z: -10}
+  m_LocalPosition: {x: -51.43, y: -20.42, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 948273151}
@@ -10257,8 +10499,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7aa1e5bb71ecc48873950f8809bf11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Verb: 
   Name: Crag
+  Verb: 
   Dialog:
     name: 
     sentences:
@@ -10629,8 +10871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a30d461026e804a9f9e2d33a61c630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Verb: 
   Name: 
+  Verb: 
   Dialog:
     name: 
     sentences: []
@@ -11667,7 +11909,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964994437}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.43, y: 20.4, z: -10}
+  m_LocalPosition: {x: -51.43, y: -20.42, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1053263987}
@@ -11947,8 +12189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0020c7acc4f41c4f9a5207e793ed1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Verb: 
   Name: Gilroy
+  Verb: 
   Dialog:
     name: Gilroy
     sentences:
@@ -15945,15 +16187,6 @@ Tilemap:
       m_TileIndex: 30
       m_TileSpriteIndex: 29
       m_TileMatrixIndex: 1
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: -38, y: -16, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 23
-      m_TileSpriteIndex: 22
-      m_TileMatrixIndex: 2
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
@@ -20862,15 +21095,6 @@ Tilemap:
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
-  - first: {x: 10, y: -4, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 11
-      m_TileMatrixIndex: 1
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
   - first: {x: 11, y: -4, z: 0}
     second:
       serializedVersion: 2
@@ -21753,24 +21977,6 @@ Tilemap:
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
-  - first: {x: 9, y: -2, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 7
-      m_TileSpriteIndex: 10
-      m_TileMatrixIndex: 1
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: 10, y: -2, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 7
-      m_TileSpriteIndex: 10
-      m_TileMatrixIndex: 1
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
   - first: {x: 11, y: -2, z: 0}
     second:
       serializedVersion: 2
@@ -22140,6 +22346,15 @@ Tilemap:
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: 7, y: -1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 7
+      m_TileSpriteIndex: 10
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   - first: {x: 8, y: -1, z: 0}
     second:
       serializedVersion: 2
@@ -22150,15 +22365,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
   - first: {x: 9, y: -1, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 7
-      m_TileSpriteIndex: 10
-      m_TileMatrixIndex: 1
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: 10, y: -1, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 7
@@ -22599,6 +22805,15 @@ Tilemap:
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: 8, y: 1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 7
+      m_TileSpriteIndex: 10
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   - first: {x: -14, y: 2, z: 0}
     second:
       serializedVersion: 2
@@ -22770,6 +22985,24 @@ Tilemap:
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: 6, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 7
+      m_TileSpriteIndex: 10
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: 10, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 7
+      m_TileSpriteIndex: 10
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   - first: {x: -14, y: 3, z: 0}
     second:
       serializedVersion: 2
@@ -22933,6 +23166,15 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
   - first: {x: 5, y: 3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 7
+      m_TileSpriteIndex: 10
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: 7, y: 3, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 7
@@ -23301,6 +23543,15 @@ Tilemap:
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: 9, y: 5, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   - first: {x: -24, y: 6, z: 0}
     second:
       serializedVersion: 2
@@ -23459,6 +23710,15 @@ Tilemap:
       serializedVersion: 2
       m_TileIndex: 19
       m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: 1, y: 6, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 4
       m_TileMatrixIndex: 1
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -31585,7 +31845,7 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 27
     m_Data: {fileID: 11400000, guid: 937c5217b34591343b38aeb42fb7514f, type: 2}
-  - m_RefCount: 5
+  - m_RefCount: 7
     m_Data: {fileID: 11400000, guid: 8b615495d2de9da44bbdbb992da5eee0, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 509bb87aff19388439a993d77d41b0e6, type: 2}
@@ -31597,7 +31857,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 4dd97124b212a6548bea6e3491848948, type: 2}
   - m_RefCount: 93
     m_Data: {fileID: 11400000, guid: 246e0a98bc9b20b43b8222a298b99d91, type: 2}
-  - m_RefCount: 775
+  - m_RefCount: 777
     m_Data: {fileID: 11400000, guid: f79cc7b6d8a04fc4ca538b595d385e41, type: 2}
   - m_RefCount: 143
     m_Data: {fileID: 11400000, guid: 3c1c6cb960bcce24b9a2db68fdcf29c6, type: 2}
@@ -31605,7 +31865,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 8c4067833133fd741a6e5171a77fc6f4, type: 2}
   - m_RefCount: 5
     m_Data: {fileID: 11400000, guid: 30a2f56e9d1c4484c9baee21a5a0fe9e, type: 2}
-  - m_RefCount: 42
+  - m_RefCount: 41
     m_Data: {fileID: 11400000, guid: 454c741b0f225a844afac5aa2b17e33a, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 6cfdf9b319425694d982c727eed4d6ba, type: 2}
@@ -31629,7 +31889,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 6bdc147b0b519ca4cac6b1b1f2c4e1de, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: 5ac4344351c938f4283a0bb83a204258, type: 2}
-  - m_RefCount: 13
+  - m_RefCount: 12
     m_Data: {fileID: 11400000, guid: 686b97dd972088d41a2e907586c6189d, type: 2}
   - m_RefCount: 8
     m_Data: {fileID: 11400000, guid: 0615747f5710bce4d8131e19466c795d, type: 2}
@@ -31690,7 +31950,7 @@ Tilemap:
     m_Data: {fileID: -5018776626252794759, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 181
     m_Data: {fileID: -1677680578183425638, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
-  - m_RefCount: 5
+  - m_RefCount: 7
     m_Data: {fileID: -5644841198866064653, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 79
     m_Data: {fileID: 3926692716954254205, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
@@ -31702,9 +31962,9 @@ Tilemap:
     m_Data: {fileID: 5236455662435403423, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 7
     m_Data: {fileID: 3236606023877482200, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
-  - m_RefCount: 850
+  - m_RefCount: 852
     m_Data: {fileID: -8862611030661805322, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
-  - m_RefCount: 38
+  - m_RefCount: 37
     m_Data: {fileID: 5816761728496367309, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 25
     m_Data: {fileID: 21300000, guid: 0b0de477399b3ab408aa0fcc9084473e, type: 3}
@@ -31726,7 +31986,7 @@ Tilemap:
     m_Data: {fileID: -4633534799361270074, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 6450878680039776089, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
-  - m_RefCount: 13
+  - m_RefCount: 12
     m_Data: {fileID: 1433780419822708852, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
   - m_RefCount: 156
     m_Data: {fileID: 6989869269358853541, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
@@ -31797,7 +32057,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 1936
+  - m_RefCount: 1939
     m_Data:
       e00: 1
       e01: 0
@@ -31815,7 +32075,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 114
+  - m_RefCount: 113
     m_Data:
       e00: 0.000000059604645
       e01: -0.99999994
@@ -31944,7 +32204,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 0, g: 0, b: 0, a: 0}
-  - m_RefCount: 2091
+  - m_RefCount: 2093
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -57450,7 +57710,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: Dialog.sentences.Array.size
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: Name
@@ -57475,12 +57735,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: Dialog.sentences.Array.data[3].Content
-      value: Unless there's something else an old Hydra can do for you, leave me
-        to comb the earth for whatever remains of my comrades.
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: Dialog.sentences.Array.data[4].Content
-      value: The walls carry word of your actions, sellsword.
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: DoesRoam
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[5].Content
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[6].Content
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[6].hasChoice
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[7].Content
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[8].Content
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[9].Content
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57534,7 +57821,8 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: e5f3998bf81b4fa47b9a759b64a50108, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 726624da2f654db44b2154d214246115, type: 3}
 --- !u!1 &1175483499 stripped
 GameObject:
@@ -57553,8 +57841,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d37891387c3b54c98245b95af3aba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Dalia
   Verb: 
-  Name: 
   Dialog:
     name: 
     sentences:
@@ -57582,29 +57870,74 @@ MonoBehaviour:
   InitialDialog:
     name: Dalia
     sentences:
-    - Content: Come to see the last of the Hydras dig through a battlefield for what
-        remains of her comrades, outsider?
+    - Content: Unless there's something the last Hydra can do for you, leave me to
+        comb the earth for whatever remains of my comrades.
       hasChoice: 0
       SentenceChoice:
         Options: []
         Responses: []
-    - Content: 
+    - Content: Hm? I guess you could call that old rotted pile a boat.
       hasChoice: 0
       SentenceChoice:
         Options: []
         Responses: []
-    - Content: 
+    - Content: Oh right, the bridge is gone. And I'm sure you and your companymen
+        are eager to collect your war chest.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: I won't ferry you across.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: If first you, then all the rest will be making empty promises about
+        a cut of their fortune as payment for crossing. Then you will all leave us
+        to rot.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: I see no reason to risk our only seaworthy vessel for someone who
+        has no regard for us or our struggle.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: Change my mind, mercenary.
       hasChoice: 0
       SentenceChoice:
         Options: []
         Responses: []
   WaitingOnQuestDialog:
-    name: 
-    sentences: []
+    name: Dalia
+    sentences:
+    - Content: I won't give you passage, mercenary.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: Not until you prove you are something more than a profiteer passing
+        through.
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
   FinalDialog:
-    name: 
-    sentences: []
-  Player: {fileID: 0}
+    name: Dalia
+    sentences:
+    - Content: you won
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: 
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+  Player: {fileID: 210921347}
 --- !u!212 &1216359883 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5333861425051414059, guid: 5aef74ef7c4e704459338649de3deb8a, type: 3}
@@ -59294,6 +59627,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: Dialog.sentences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[2].SentenceChoice.Options.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[2].SentenceChoice.Responses.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
@@ -59321,6 +59662,42 @@ PrefabInstance:
 
         Forever
         a Hydra, In This World and The Next '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[2].Content
+      value: Leave the Mountain Tear here?
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[2].hasChoice
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[2].SentenceChoice.Options.Array.data[0]
+      value: Yes
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[2].SentenceChoice.Options.Array.data[1]
+      value: No
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[2].SentenceChoice.Responses.Array.data[0].String
+      value: You place the flower gingerly in front of the gravestone.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[2].SentenceChoice.Responses.Array.data[0].HasEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.sentences.Array.data[2].SentenceChoice.Responses.Array.data[1].String
+      value: You step away from the gravestone.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Verb
+      value: Read
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_LocalPosition.x
@@ -59368,7 +59745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Name
-      value: Gravestone (2)
+      value: Orrina's Gravestone
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277323, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Sprite
@@ -60155,6 +60532,14 @@ PrefabInstance:
       propertyPath: Items.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3145551724836607463, guid: 5aef74ef7c4e704459338649de3deb8a, type: 3}
+      propertyPath: HasPointer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3145551724836607463, guid: 5aef74ef7c4e704459338649de3deb8a, type: 3}
+      propertyPath: Items.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3823d242f4354a24092dd19b5b085740, type: 2}
     - target: {fileID: 3145551724836607464, guid: 5aef74ef7c4e704459338649de3deb8a, type: 3}
       propertyPath: m_Name
       value: Player Inventory
@@ -60586,11 +60971,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6861843112284075068, guid: a4d222e2a94778c42834cd427397abb8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -18.43
+      value: -51.43
       objectReference: {fileID: 0}
     - target: {fileID: 6861843112284075068, guid: a4d222e2a94778c42834cd427397abb8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 20.4
+      value: -20.42
       objectReference: {fileID: 0}
     - target: {fileID: 6861843112284075068, guid: a4d222e2a94778c42834cd427397abb8, type: 3}
       propertyPath: m_SizeDelta.x
@@ -60752,6 +61137,10 @@ PrefabInstance:
       propertyPath: UnarmoredSprite
       value: 
       objectReference: {fileID: 412878400227365875, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
+    - target: {fileID: 6861843112284075071, guid: a4d222e2a94778c42834cd427397abb8, type: 3}
+      propertyPath: RopePrefab
+      value: 
+      objectReference: {fileID: 11400000, guid: f01804bcafd93534cb91d806ab18f3a0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d222e2a94778c42834cd427397abb8, type: 3}
 --- !u!1001 &7868239400507611556

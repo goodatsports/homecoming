@@ -46,6 +46,8 @@ public class NPCController : Interactable
     protected virtual void Awake()
     {
         if (Verb == "") Verb = "Talk to";
+
+        // Retain newline escape characters from inspector text fields for Dialog
         for (int i = 0; i < Dialog.sentences.Length; i++) {
             Dialog.sentences[i].Content = Dialog.sentences[i].Content.Replace("\\n", "\n");
         }

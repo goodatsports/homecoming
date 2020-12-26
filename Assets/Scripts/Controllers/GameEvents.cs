@@ -58,6 +58,7 @@ public class GameEvents : MonoBehaviour
     public event Action onGilroyStoryReset;
 
     public event Action onAxeTrade;
+    public event Action onGharnamQuestComplete;
 
 
     public void ShoppingEnd() {
@@ -89,6 +90,9 @@ public class GameEvents : MonoBehaviour
                 break;
             case 7:
                 onAxeTrade?.Invoke();
+                break;
+            case 8:
+                onGharnamQuestComplete?.Invoke();
                 break;
             case 0:
                 break;

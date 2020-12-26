@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DaliaNPCController : NPCController
 {
-     bool HadInitialConvo = false;
+    bool HadInitialConvo = false;
     public Dialog InitialDialog;
     public Dialog WaitingOnQuestDialog;
     public Dialog FinalDialog;

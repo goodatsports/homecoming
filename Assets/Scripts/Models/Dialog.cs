@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +24,18 @@ public class Dialog
     public Dialog(Sentence[] sentences, string name) {
         this.name = name;
         this.sentences = sentences;
+    }
+
+    // Add a sentence to the end of Dialog
+    public void AddSentence(Sentence newSentence) {
+        Array.Resize(ref sentences, sentences.Length + 1);
+        sentences[sentences.Length - 1] = newSentence;
+
+    }
+
+    // Return shallow copy of this Dialog object
+    public Dialog Copy() {
+        return (Dialog)this.MemberwiseClone();
     }
 
 }
