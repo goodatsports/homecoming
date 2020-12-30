@@ -393,6 +393,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &131971903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
+  m_PrefabInstance: {fileID: 1675275986}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &131971904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131971903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420d4f8142349514e87fe1d603675fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Gravestone
+  Verb: Read
+  Dialog:
+    name: Gravestone
+    sentences:
+    - Content: "\t\t\t     Romulo!   \n\tGrand Company Troubador, Lantzfal Hydras,\n\t\t   
+        Command Regiment\n\n\t\t     K.E. 869  -  K.E. 843\n"
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: "Perished during Helia's Counterattack\nWith Him Goes Our Company,\nA
+        History Lost to Fire and Flood,\nSung Softly From Winestained Lips \nForever
+        a Hydra, In This World and The Next "
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+  DialogController: {fileID: 0}
+  Map: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  DoesRoam: 0
+  RoamRange: 2
+  TimingOffset: 0
+  PlayerHasTearDialog:
+    name: 
+    sentences: []
+  GraveHasTearDialog:
+    name: 
+    sentences: []
+  Player: {fileID: 0}
+  HasTear: 0
 --- !u!1 &142260948
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +537,14 @@ PrefabInstance:
         at Protective Magicks Til Her Last Breath,\nForever a Hydra, In This World
         and The Next \n"
       objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Verb
+      value: Read
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Dialog.name
+      value: Gravestone
+      objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_LocalPosition.x
       value: -54.5
@@ -534,7 +591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Name
-      value: Gravestone
+      value: Elenore's Gravestone
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277323, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Sprite
@@ -560,7 +617,8 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 726624da2f654db44b2154d214246115, type: 3}
 --- !u!1 &169608408
 GameObject:
@@ -1293,6 +1351,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_PrefabInstance: {fileID: 237652518}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &263614047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
+  m_PrefabInstance: {fileID: 1487648465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &263614048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263614047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420d4f8142349514e87fe1d603675fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Gravestone
+  Verb: Read
+  Dialog:
+    name: Gravestone
+    sentences:
+    - Content: "\t\t\t   Djura es Erghain\n   \t    High Mason of the Wall, Lantzfal
+        Hydras,\n\t\t\t    Command Regiment\n\n\t\t          K.E. 880  -  K.E. 843"
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: 'Perished in the Siege of the Old Citadel
+
+        Healer of Stone
+        Wounds,
+
+        Protector of the Valley and Its Carapace,
+
+        Forever
+        a Hydra, In This World and The Next '
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+  DialogController: {fileID: 0}
+  Map: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  DoesRoam: 0
+  RoamRange: 2
+  TimingOffset: 0
+  PlayerHasTearDialog:
+    name: 
+    sentences: []
+  GraveHasTearDialog:
+    name: 
+    sentences: []
+  Player: {fileID: 0}
+  HasTear: 0
 --- !u!4 &292741797 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
@@ -1404,15 +1517,6 @@ MonoBehaviour:
   Name: Gravestone
   Verb: Read
   Dialog:
-    name: 
-    sentences: []
-  DialogController: {fileID: 0}
-  Map: {fileID: 0}
-  Destination: {x: 0, y: 0, z: 0}
-  DoesRoam: 0
-  RoamRange: 2
-  TimingOffset: 0
-  DefaultDialog:
     name: Gravestone
     sentences:
     - Content: "\t\t         Orrina Lasmin\n   Councilor of the People's Estate,
@@ -1435,6 +1539,12 @@ MonoBehaviour:
       SentenceChoice:
         Options: []
         Responses: []
+  DialogController: {fileID: 0}
+  Map: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  DoesRoam: 0
+  RoamRange: 2
+  TimingOffset: 0
   PlayerHasTearDialog:
     name: 
     sentences: []
@@ -1442,6 +1552,7 @@ MonoBehaviour:
     name: 
     sentences: []
   Player: {fileID: 210921347}
+  HasTear: 0
 --- !u!4 &325605021 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6462456942510693867, guid: 4661bf5ff264e9d41b2a0e6ce1212eb6, type: 3}
@@ -1484,6 +1595,10 @@ PrefabInstance:
         The Next
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
+      propertyPath: Verb
+      value: Read
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1531,7 +1646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Name
-      value: Gravestone (1)
+      value: Yeoman's Gravestone
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277323, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Sprite
@@ -1557,8 +1672,64 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 726624da2f654db44b2154d214246115, type: 3}
+--- !u!1 &343009856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
+  m_PrefabInstance: {fileID: 343009855}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &343009857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343009856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420d4f8142349514e87fe1d603675fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Gravestone
+  Verb: Read
+  Dialog:
+    name: Gravestone
+    sentences:
+    - Content: "\t\t\"Yeoman\" The Einhander\n\t      Master Bladework, Lantzfall
+        Hydras, \n\t\t   Command Regiment\n\n\t\t    K.E. 898  -  K.E. 843"
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: 'Perished during Helia''s Counterattack
+
+        An Enigma Til The
+        End,
+
+        A Peerless Duelist Til the End,
+
+        Forever a Hydra, In
+        This World and The Next'
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+  DialogController: {fileID: 0}
+  Map: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  DoesRoam: 0
+  RoamRange: 2
+  TimingOffset: 0
+  PlayerHasTearDialog:
+    name: 
+    sentences: []
+  GraveHasTearDialog:
+    name: 
+    sentences: []
+  Player: {fileID: 0}
+  HasTear: 0
 --- !u!4 &344944415 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
@@ -10699,6 +10870,61 @@ Transform:
   m_Father: {fileID: 2074438776}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &742103691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
+  m_PrefabInstance: {fileID: 854073274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &742103692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742103691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420d4f8142349514e87fe1d603675fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Gravestone
+  Verb: Read
+  Dialog:
+    name: Gravestone
+    sentences:
+    - Content: "\t\t             Saarid Hemza\n  \t\t\t   Baker, Father\n\t                    
+        Honorary Hydra\n\n\t\t        K.E. 885  -  K.E. 843"
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: 'Perished in the Siege of the Old Citadel
+
+        Keeper of the Grain
+        and Alchemist of the Kiln,
+
+        Nourishing the People in Times of Joy
+        and Grief
+
+        Forever a Hydra, In This World and The Next '
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+  DialogController: {fileID: 0}
+  Map: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  DoesRoam: 0
+  RoamRange: 2
+  TimingOffset: 0
+  PlayerHasTearDialog:
+    name: 
+    sentences: []
+  GraveHasTearDialog:
+    name: 
+    sentences: []
+  Player: {fileID: 0}
+  HasTear: 0
 --- !u!1001 &751806396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11067,7 +11293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Name
-      value: Gravestone (4)
+      value: Saarid's Gravestone
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277323, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Sprite
@@ -11093,7 +11319,8 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 726624da2f654db44b2154d214246115, type: 3}
 --- !u!1001 &868108392
 PrefabInstance:
@@ -11206,7 +11433,8 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 726624da2f654db44b2154d214246115, type: 3}
 --- !u!4 &870188015 stripped
 Transform:
@@ -11310,6 +11538,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa69d517db5080049b7d003015cf266e, type: 3}
+--- !u!1 &879865689 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
+  m_PrefabInstance: {fileID: 919993537}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &879865694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879865689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420d4f8142349514e87fe1d603675fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Gravestone
+  Verb: Read
+  Dialog:
+    name: 
+    sentences:
+    - Content: "\t\t     Henrik Elgrove\n\t      Standard Bearer, Lantzfall Hydras,
+        \n\t\t   Command Regiment\n\n\t\t    K.E. 868  -  K.E. 843"
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: 'Perished in the Defense of Highwall
+
+        A Son of the Valley
+        and Brother of Helia,
+
+        Once Fast Onto the Ramparts,
+
+        Returned
+        to The Dark Soil Below
+
+        Forever a Hydra, In This World and The Next'
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+  DialogController: {fileID: 0}
+  Map: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  DoesRoam: 0
+  RoamRange: 2
+  TimingOffset: 0
+  PlayerHasTearDialog:
+    name: 
+    sentences: []
+  GraveHasTearDialog:
+    name: 
+    sentences: []
+  Player: {fileID: 0}
+  HasTear: 0
 --- !u!1 &896534848
 GameObject:
   m_ObjectHideFlags: 0
@@ -11489,7 +11774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Name
-      value: Gravestone (3)
+      value: Henrik's Gravestone
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277323, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Sprite
@@ -11515,7 +11800,8 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 726624da2f654db44b2154d214246115, type: 3}
 --- !u!4 &919993538 stripped
 Transform:
@@ -12464,7 +12750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Name
-      value: Gravestone (5)
+      value: Djura's Gravestone
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277323, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Sprite
@@ -12490,7 +12776,8 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 726624da2f654db44b2154d214246115, type: 3}
 --- !u!1 &1031053408
 GameObject:
@@ -57948,6 +58235,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_PrefabInstance: {fileID: 1956360817}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1257310211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
+  m_PrefabInstance: {fileID: 149588780}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1257310216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257310211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420d4f8142349514e87fe1d603675fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Gravestone
+  Verb: Read
+  Dialog:
+    name: Gravestone
+    sentences:
+    - Content: "\t\t\tElenore Grasda\n\tShieldmancer, Lantzfal Hydras, VII Regiment,\n\n\t\t\tK.E.
+        871  -  K.E. 843"
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: 'Perished in the Siege of Old Citadel
+
+        Lover of Drink and
+        Study,
+
+        Masterwork at Protective Magicks Til Her Last Breath,
+
+        Forever
+        a Hydra, In This World and The Next '
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+  DialogController: {fileID: 0}
+  Map: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  DoesRoam: 0
+  RoamRange: 2
+  TimingOffset: 0
+  PlayerHasTearDialog:
+    name: 
+    sentences: []
+  GraveHasTearDialog:
+    name: 
+    sentences: []
+  Player: {fileID: 0}
+  HasTear: 0
 --- !u!4 &1292298346 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3485976574296976111, guid: d1e30ff0c06881640ad4d8c2a30a411d, type: 3}
@@ -58237,7 +58579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Name
-      value: Gravestone (6)
+      value: Erghain's Gravestone
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277323, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Sprite
@@ -58263,7 +58605,8 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 726624da2f654db44b2154d214246115, type: 3}
 --- !u!224 &1490051326 stripped
 RectTransform:
@@ -59064,7 +59407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Name
-      value: Gravestone (7)
+      value: Romulo's Gravestone
       objectReference: {fileID: 0}
     - target: {fileID: 6915671840078277323, guid: 726624da2f654db44b2154d214246115, type: 3}
       propertyPath: m_Sprite
@@ -59090,7 +59433,8 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 726624da2f654db44b2154d214246115, type: 3}
 --- !u!4 &1679999635 stripped
 Transform:
@@ -59603,6 +59947,61 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 726624da2f654db44b2154d214246115, type: 3}
+--- !u!1 &1840156377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
+  m_PrefabInstance: {fileID: 1021586715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1840156382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840156377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420d4f8142349514e87fe1d603675fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Gravestone
+  Verb: Read
+  Dialog:
+    name: Gravestone
+    sentences:
+    - Content: "\t\t\t    Djura es Batra\n   \t    Ranger of the Wall, Lantzfal Hydras,\n\t\t\t   
+        VII Regiment\n\n\t\t          K.E. 874  -  K.E. 843"
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: 'Perished in the Defense of Highwall
+
+        As Deft of Bowhand as
+        Wielder of Rope and Piton,
+
+        Eternal Watcher of the Highwall''s Ascent,
+
+        Forever
+        a Hydra, In This World and The Next '
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+  DialogController: {fileID: 0}
+  Map: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  DoesRoam: 0
+  RoamRange: 2
+  TimingOffset: 0
+  PlayerHasTearDialog:
+    name: 
+    sentences: []
+  GraveHasTearDialog:
+    name: 
+    sentences: []
+  Player: {fileID: 0}
+  HasTear: 0
 --- !u!4 &1857670912 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
@@ -59613,6 +60012,64 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_PrefabInstance: {fileID: 1021586715}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1875676622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6915671840078277321, guid: 726624da2f654db44b2154d214246115, type: 3}
+  m_PrefabInstance: {fileID: 868108392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1875676623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875676622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420d4f8142349514e87fe1d603675fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Gravestone
+  Verb: Read
+  Dialog:
+    name: Gravestone
+    sentences:
+    - Content: "\t\t\tHelia Elgrove   \n   \t Speaker of the Company, Lantzfal Hydras,\n\t\t   
+        Command Regiment\n\n\t\t          K.E. 878  -  K.E. 843"
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: 'Perished during Her Violent Counterattack
+
+        Daughter of the
+        Valley,
+
+        Full of Fury Til the End,
+
+        Whose Final Charge is
+        Worthy of Silk & Tapestry,
+
+        Forever a Hydra, In This World and The
+        Next '
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+  DialogController: {fileID: 0}
+  Map: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  DoesRoam: 0
+  RoamRange: 2
+  TimingOffset: 0
+  PlayerHasTearDialog:
+    name: 
+    sentences: []
+  GraveHasTearDialog:
+    name: 
+    sentences: []
+  Player: {fileID: 0}
+  HasTear: 0
 --- !u!4 &1937250577 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6915671840078277316, guid: 726624da2f654db44b2154d214246115, type: 3}
@@ -59771,7 +60228,8 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1766076001493388686, guid: 726624da2f654db44b2154d214246115, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 726624da2f654db44b2154d214246115, type: 3}
 --- !u!1001 &1967447525
 PrefabInstance:
@@ -60540,6 +60998,10 @@ PrefabInstance:
       propertyPath: Items.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 3823d242f4354a24092dd19b5b085740, type: 2}
+    - target: {fileID: 3145551724836607463, guid: 5aef74ef7c4e704459338649de3deb8a, type: 3}
+      propertyPath: Items.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 24ecec0370ee0fb4f8379c3616c75c31, type: 2}
     - target: {fileID: 3145551724836607464, guid: 5aef74ef7c4e704459338649de3deb8a, type: 3}
       propertyPath: m_Name
       value: Player Inventory
@@ -60596,6 +61058,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1653722557}
     m_Modifications:
+    - target: {fileID: 3485976574296976108, guid: d1e30ff0c06881640ad4d8c2a30a411d, type: 3}
+      propertyPath: TearPrefab
+      value: 
+      objectReference: {fileID: 11400000, guid: 24ecec0370ee0fb4f8379c3616c75c31, type: 2}
     - target: {fileID: 3485976574296976109, guid: d1e30ff0c06881640ad4d8c2a30a411d, type: 3}
       propertyPath: m_Name
       value: GameEvents

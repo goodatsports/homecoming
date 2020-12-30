@@ -11,29 +11,31 @@ using UnityEngine;
 public class GravestoneNPCController : NPCController
 {
     // Change Dialog to have choices based on whether Player or Grave has flower in front of it
-    public Dialog DefaultDialog;
     public Dialog PlayerHasTearDialog;
     public Dialog GraveHasTearDialog;
     public PlayerController Player;
-    bool GraveHasTear = false;
+    public bool HasTear = false;
+    private Dialog DefaultDialog;
+
     protected override void Awake() {
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
-        Dialog = DefaultDialog;
+        DefaultDialog = Dialog;
 
         // Copy default dialog into other dialog options as a base, then add sentences with choice to either add/remove flower
-        PlayerHasTearDialog = DefaultDialog.Copy();
-        GraveHasTearDialog = DefaultDialog.Copy();
+        PlayerHasTearDialog = Dialog.Copy();
+        GraveHasTearDialog = Dialog.Copy();
 
         PlayerHasTearDialog.AddSentence(new Sentence("Place Mountain Tear on grave?",
             new Choice(new string[] { "Yes", "No" }, new Response[] { 
-                new Response("You place the flower gingerly in front of the gravestone."),
+                new Response("You place the flower gingerly in front of the gravestone.", true, 9),
                 new Response("You step away from the grave.")})));
 
         GraveHasTearDialog.AddSentence(new Sentence("The Mountain Tear sits in front of the grave."));
         GraveHasTearDialog.AddSentence(new Sentence("Take the Mountain Tear?",
             new Choice(new string[] { "Yes", "No" }, new Response[] {
-                new Response("You take the flower from the grave and place it in your satchel."),
+                new Response("You take the flower from the grave and place it in your satchel.", true, 10),
                 new Response("You step away from the grave.")})));
+
 
         base.Awake();
     }
@@ -42,7 +44,7 @@ public class GravestoneNPCController : NPCController
         if (Player.HasTear()) {
             Dialog = PlayerHasTearDialog;
         }
-        else if (GraveHasTear) Dialog = GraveHasTearDialog;
+        else if (HasTear) Dialog = GraveHasTearDialog;
         else Dialog = DefaultDialog;
         base.Interact();
     }

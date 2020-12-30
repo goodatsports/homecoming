@@ -7,10 +7,13 @@ using UnityEngine;
 public class GameEvents : MonoBehaviour
 {
     public static GameEvents current;
+    public PlayerController Player;
+    public Item TearPrefab;
     // Start is called before the first frame update
     void Awake()
     {
         current = this;
+        Player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Player Inventory events
@@ -60,7 +63,6 @@ public class GameEvents : MonoBehaviour
     public event Action onAxeTrade;
     public event Action onGharnamQuestComplete;
 
-
     public void ShoppingEnd() {
         onShoppingEnd?.Invoke();
     }
@@ -94,9 +96,27 @@ public class GameEvents : MonoBehaviour
             case 8:
                 onGharnamQuestComplete?.Invoke();
                 break;
+            case 9:
+                PlaceFlowerAtGrave();
+                break;
+            case 10:
+                GetFlowerFromGrave();
+                break;
             case 0:
                 break;
         }
+    }
+
+    public void PlaceFlowerAtGrave() {
+        GravestoneNPCController Grave = Player.Target.GetComponent<GravestoneNPCController>();
+        Player.Inventory.RemoveItem("Mountain Tear");
+        Grave.HasTear = true;
+    }
+
+    public void GetFlowerFromGrave() {
+        GravestoneNPCController Grave = Player.Target.GetComponent<GravestoneNPCController>();
+        Player.Inventory.AddItem(TearPrefab);
+        Grave.HasTear = false;
     }
 
     // Tree Chopping events
