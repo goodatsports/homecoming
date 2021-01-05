@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GharnamNPCController : NPCController
 {
-    bool HadInitialConvo = false;
-    bool HadMissionTurnInConvo = false;
-    bool HadFinalConvo = false;
+   public bool HadInitialConvo = false;
+    public bool HadMissionTurnInConvo = false;
+    public bool HadFinalConvo = false;
     public Dialog InitialDialog;
     public Dialog WaitingOnItemDialog;
     public Dialog PostMissionDialog;
@@ -22,11 +22,6 @@ public class GharnamNPCController : NPCController
         if (Player.HasTear() && !HadMissionTurnInConvo) {
             Dialog = PostMissionDialog;
         }
-
-        if (HadMissionTurnInConvo) {
-            Dialog = FinalDialog;
-        }
-
         base.Interact();
     }
 
@@ -35,9 +30,13 @@ public class GharnamNPCController : NPCController
             GameEvents.current.NPCDialogEnd();
             if (!HadInitialConvo) {
                 HadInitialConvo = true;
-                Dialog = WaitingOnItemDialog;
-            } 
-            if (Dialog == PostMissionDialog) HadMissionTurnInConvo = true;
+            }
+            print("dialog == postmissiondialog ?: " + (Dialog == PostMissionDialog));
+            if (Dialog == PostMissionDialog) {
+                HadMissionTurnInConvo = true;
+                Dialog = FinalDialog;
+            }
+            else if (!HadMissionTurnInConvo) Dialog = WaitingOnItemDialog;
             return;
         }
         else {

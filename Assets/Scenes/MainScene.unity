@@ -9838,6 +9838,9 @@ MonoBehaviour:
   DoesRoam: 0
   RoamRange: 2
   TimingOffset: 0
+  HadInitialConvo: 0
+  HadMissionTurnInConvo: 0
+  HadFinalConvo: 0
   InitialDialog:
     name: Gharnam
     sentences:
@@ -10209,7 +10212,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.5, y: 38.5, z: -10}
+  m_LocalPosition: {x: 16.51, y: -2.44, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 948273151}
@@ -12587,7 +12590,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964994437}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.5, y: 38.5, z: -10}
+  m_LocalPosition: {x: 16.51, y: -2.44, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1053263987}
@@ -68505,11 +68508,11 @@ PrefabInstance:
     - target: {fileID: 3145551724836607463, guid: 5aef74ef7c4e704459338649de3deb8a, type: 3}
       propertyPath: Items.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 3823d242f4354a24092dd19b5b085740, type: 2}
+      objectReference: {fileID: 11400000, guid: f97341d1c7ce8704cbdb8e93d309ee32, type: 2}
     - target: {fileID: 3145551724836607463, guid: 5aef74ef7c4e704459338649de3deb8a, type: 3}
       propertyPath: Items.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 24ecec0370ee0fb4f8379c3616c75c31, type: 2}
+      objectReference: {fileID: 11400000, guid: 8cde43c56ed46c649971f4e682303059, type: 2}
     - target: {fileID: 3145551724836607464, guid: 5aef74ef7c4e704459338649de3deb8a, type: 3}
       propertyPath: m_Name
       value: Player Inventory
@@ -68945,11 +68948,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6861843112284075068, guid: a4d222e2a94778c42834cd427397abb8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -17.5
+      value: 16.51
       objectReference: {fileID: 0}
     - target: {fileID: 6861843112284075068, guid: a4d222e2a94778c42834cd427397abb8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 38.5
+      value: -2.44
       objectReference: {fileID: 0}
     - target: {fileID: 6861843112284075068, guid: a4d222e2a94778c42834cd427397abb8, type: 3}
       propertyPath: m_SizeDelta.x
