@@ -29,7 +29,7 @@ public class DialogController : MonoBehaviour
 
     private Queue<Sentence> sentences;
     private Dialog WorkingDialog;
-    private bool isTyping = false;
+    public bool isTyping = false;
     private Sentence currentSentence;
     private bool _hasSentences = true;
     public bool HasSentences { get => _hasSentences; private set { _hasSentences = value; } }

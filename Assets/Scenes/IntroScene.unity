@@ -295,6 +295,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1963175165 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6861414873135899878, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+  m_PrefabInstance: {fileID: 6861414872917952539}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5396994881484428527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -377,18 +382,20 @@ PrefabInstance:
         You have been fighting in a bloody war
         on another continent for the past six months.
 
-        You lost.
+        Two weeks ago, your
+        employer nation surrendered.
 
 
 '
       objectReference: {fileID: 0}
     - target: {fileID: 5396994881310533078, guid: 5da70a27f377a8d49948a9c77fd72cd1, type: 3}
       propertyPath: IntroDialog.sentences.Array.data[1].Content
-      value: 'After two weeks of travel, you''ve returned to the capital to collect
-        your pay for services rendered.
+      value: 'After traveling across the sealands, you''ve returned to the capital
+        to collect your pay for services rendered.
 
-        Upon returning to the outskirts
-        of town, you find the main bridge has been destroyed.'
+        Upon reaching the outskirts
+        of town, you find the main bridge connecting the capital island and the mainland
+        has been destroyed.'
       objectReference: {fileID: 0}
     - target: {fileID: 5396994881310533078, guid: 5da70a27f377a8d49948a9c77fd72cd1, type: 3}
       propertyPath: IntroDialog.sentences.Array.data[1].SentenceChoice.Responses.Array.data[0].HasEvent
@@ -430,6 +437,10 @@ PrefabInstance:
       propertyPath: IntroDialog.sentences.Array.data[2].SentenceChoice.Responses.Array.data[1].EventId
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5396994881310533078, guid: 5da70a27f377a8d49948a9c77fd72cd1, type: 3}
+      propertyPath: AdvanceIndicator
+      value: 
+      objectReference: {fileID: 1963175165}
     - target: {fileID: 5396994881310533079, guid: 5da70a27f377a8d49948a9c77fd72cd1, type: 3}
       propertyPath: m_Name
       value: IntroManager
@@ -457,6 +468,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d34b87b357d064ca87be5015321f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &6861414872917952539
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6462456942474772075}
+    m_Modifications:
+    - target: {fileID: 6861414873135899877, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861414873135899877, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861414873135899877, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861414873135899877, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861414873135899877, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861414873135899877, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861414873135899877, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861414873135899877, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861414873135899877, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861414873135899877, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861414873135899877, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861414873135899878, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
+      propertyPath: m_Name
+      value: AdvanceIndicator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 16b9b0142c9a20a4387e1e74fe2be925, type: 3}
 --- !u!1001 &7901090060113617030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -468,6 +536,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1685562903}
+    - target: {fileID: 3749543376516320511, guid: 59925e49d87b5ee4aa95f22bcf82b487, type: 3}
+      propertyPath: m_margin.z
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3749543377118007810, guid: 59925e49d87b5ee4aa95f22bcf82b487, type: 3}
       propertyPath: m_Name
       value: Dialog UI
@@ -514,6 +586,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3749543377118007811, guid: 59925e49d87b5ee4aa95f22bcf82b487, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071402915531031043, guid: 59925e49d87b5ee4aa95f22bcf82b487, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

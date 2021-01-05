@@ -98,7 +98,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Strong, pliable, deceptively graceful when thrown
+  m_text: Worn but sturdy, full of hewing potential
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Acrobat's Rope
+  m_text: Woodcutter's Axe
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -409,7 +409,7 @@ SpriteRenderer:
   m_SortingLayerID: -1733229765
   m_SortingLayer: 3
   m_SortingOrder: 4
-  m_Sprite: {fileID: -3423456175924762378, guid: b84eee8235bb62543bd6a3927236d987, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 966a842a36982114585e1b0a6f50cb97, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

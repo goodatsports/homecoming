@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IntroductionManager : MonoBehaviour
 {
     public GameObject TextboxUI;
+    public GameObject AdvanceIndicator;
     public RectTransform Background;
     public DialogController DialogControl;
     public InputMaster Controls;
@@ -18,7 +20,7 @@ public class IntroductionManager : MonoBehaviour
     public Dialog IntroDialog;
     void Awake() {
         Controls = new InputMaster();
-
+        AdvanceIndicator.SetActive(false);
         nextScene = SceneManager.GetActiveScene().buildIndex + 1;
         if (nextScene > SceneManager.sceneCountInBuildSettings - 1) nextScene = 0;
         
@@ -59,8 +61,13 @@ public class IntroductionManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+        if (!DialogControl.isTyping && !AdvanceIndicator.activeSelf) {
+            AdvanceIndicator.SetActive(true);
+        }
+        if (DialogControl.isTyping && AdvanceIndicator.activeSelf) {
+            AdvanceIndicator.SetActive(false);
+        }
     }
 }
