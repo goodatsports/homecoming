@@ -2,12 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// TO-DO: 
-/// - Add GameEvents IDs for getting/leaving Mountain Tear at grave, pass which Gravestone it happened to. (via current player Target? new grave ID field?)
-/// - Flip GraveHasTear field of target Gravestone
-/// - Add/Remove Mountain Tear from Player Inventory (from GameEvents/PlayerContoller)
-/// </summary>
 public class GravestoneNPCController : NPCController
 {
     // Change Dialog to have choices based on whether Player or Grave has flower in front of it

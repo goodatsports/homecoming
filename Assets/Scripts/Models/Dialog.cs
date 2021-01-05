@@ -30,7 +30,6 @@ public class Dialog
     public void AddSentence(Sentence newSentence) {
         Array.Resize(ref sentences, sentences.Length + 1);
         sentences[sentences.Length - 1] = newSentence;
-
     }
 
     // Return shallow copy of this Dialog object

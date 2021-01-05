@@ -8,11 +8,24 @@ public class DaliaNPCController : NPCController
     public Dialog InitialDialog;
     public Dialog WaitingOnQuestDialog;
     public Dialog FinalDialog;
+
+    // Set dialog for if Player finishes final quest before talking to Dalia
+    public Dialog OneShotDialog;
+
     public PlayerController Player;
     protected override void Awake() {
         Name = "Dalia";
         Dialog = InitialDialog;
+        GameEvents.current.onCorrectFlowerPlacement += SetFinalDialog;
         base.Awake();
+    }
+
+    public void SetFinalDialog() {
+        if (HadInitialConvo) {
+            Dialog = FinalDialog;
+        } else {
+            Dialog = OneShotDialog;
+        }
     }
 
     public override void Interact() {

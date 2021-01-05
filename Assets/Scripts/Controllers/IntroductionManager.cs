@@ -13,16 +13,18 @@ public class IntroductionManager : MonoBehaviour
     public InputAction DialogAdvance;
 
     private int nextScene;
-
+    
     [SerializeField]
     public Dialog IntroDialog;
     void Awake() {
         Controls = new InputMaster();
+
         nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextScene > SceneManager.sceneCountInBuildSettings - 1) nextScene = 0;
+        
 
         //Event subscription for end of intro dialog
         GameEvents.current.onNPCDialogEnd += StartGame;
-
 
         DialogAdvance = Controls.Intro.AdvanceDialog;
         DialogAdvance.started += ctx => { AdvanceDialog(); };

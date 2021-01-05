@@ -30,6 +30,7 @@ public class ItemController : Interactable
     public override void Interact() {
         if (!Interacting) {
             Interacting = true;
+            GameEvents.current.NPCDialogStart();
             DialogController.StartDialog(PickupDialog);
         }
         else if (DialogController.HasSentences) {
@@ -38,6 +39,7 @@ public class ItemController : Interactable
         }
         if (!DialogController.HasSentences) {
             Interacting = false;
+            GameEvents.current.NPCDialogEnd();
             PickUp();
         }
     }

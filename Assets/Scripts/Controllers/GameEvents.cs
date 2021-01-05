@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class GameEvents : MonoBehaviour
@@ -9,11 +8,13 @@ public class GameEvents : MonoBehaviour
     public static GameEvents current;
     public PlayerController Player;
     public Item TearPrefab;
+    private int nextScene;
     // Start is called before the first frame update
     void Awake()
     {
         current = this;
-        Player = GameObject.Find("Player").GetComponent<PlayerController>();
+        GameObject playerObject = GameObject.Find("Player");
+        if (playerObject != null) Player = playerObject.GetComponent<PlayerController>();
     }
 
     // Player Inventory events
@@ -49,7 +50,7 @@ public class GameEvents : MonoBehaviour
         onDialogChoiceMade?.Invoke(choice);
     }
 
-    // Shopping events
+   // Events
 
     public event Action onShoppingStart;
     public event Action onShoppingEnd;
@@ -62,6 +63,11 @@ public class GameEvents : MonoBehaviour
 
     public event Action onAxeTrade;
     public event Action onGharnamQuestComplete;
+
+    public event Action onCorrectFlowerPlacement;
+    public string GraveQuestName = "Orrina";
+
+    public event Action onGameEnd;
 
     public void ShoppingEnd() {
         onShoppingEnd?.Invoke();
@@ -102,6 +108,9 @@ public class GameEvents : MonoBehaviour
             case 10:
                 GetFlowerFromGrave();
                 break;
+            case 11:
+                onGameEnd?.Invoke();
+                break;
             case 0:
                 break;
         }
@@ -111,6 +120,11 @@ public class GameEvents : MonoBehaviour
         GravestoneNPCController Grave = Player.Target.GetComponent<GravestoneNPCController>();
         Player.Inventory.RemoveItem("Mountain Tear");
         Grave.HasTear = true;
+
+        if (Grave.Dialog.sentences[0].Content.Contains(GraveQuestName)) {
+            print("flower done");
+            onCorrectFlowerPlacement?.Invoke();
+        }
     }
 
     public void GetFlowerFromGrave() {

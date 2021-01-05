@@ -6,12 +6,12 @@ using UnityEngine;
 public class TargetController : MonoBehaviour
 {
     public GameObject UI;
-    private TextMeshProUGUI Text;
+    private TextMeshPro Text;
     private string Name;
     private SpriteRenderer[] Markers;
     public bool isVisible;
     private void Awake() {
-        Text = UI.GetComponentInChildren<TextMeshProUGUI>();
+        Text = UI.GetComponentInChildren<TextMeshPro>();
         Markers = gameObject.GetComponentsInChildren<SpriteRenderer>();
 
         if (Text == null) print("Target Text UI not found!");
@@ -36,7 +36,7 @@ public class TargetController : MonoBehaviour
     }
 
     public void UpdateTarget(Interactable newTarget) {
-        Text.text = $"{newTarget.Verb} {newTarget.Name}";
+        Text.text = $"Press E to {newTarget.Verb} {newTarget.Name}";
     }
 
 }
