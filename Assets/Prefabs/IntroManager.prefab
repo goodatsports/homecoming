@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5396994881310533079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5396994881310533077}
+  - component: {fileID: 5396994881310533078}
+  m_Layer: 0
+  m_Name: IntroManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5396994881310533077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5396994881310533079}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5396994881310533078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5396994881310533079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a818654546547de4aa4f8ccd1093ee8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextboxUI: {fileID: 0}
+  Background: {fileID: 0}
+  DialogControl: {fileID: 0}
+  DialogAdvance:
+    m_Name: Dialog Advance
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8d6e0e87-048f-44f3-9ac8-afea89a7680e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  IntroDialog:
+    name: 
+    sentences:
+    - Content: "eyyy lmao fdsljaflkdsjalfkdsaj \nfdklajfdlskjkffjfjfjjfjfjfj\nskl;ajflkdsajfldsja;lfdjks\nfkldsajflkdsjalkfjdsa\nfjda;'jfl;dsajkf\nejaahahahflsdk\nfjdsalkfjdls;ajl;fsd"
+      hasChoice: 0
+      SentenceChoice:
+        Options: []
+        Responses: []
+    - Content: "eyyy lmao fdsljaflkdsjalfkdsaj \nfdklajfdlskjkffjfjfjjfjfjfj\nskl;ajflkdsajfldsja;lfdjks\nfkldsajflkdsjalkfjdsa\nfjda;'jfl;dsajkf\nejaahahahflsdk\nfjdsalkfjdls;ajl;fsd"
+      hasChoice: 0
+      SentenceChoice:
+        Options:
+        - ' '
+        - ' '
+        Responses:
+        - String: ' '
+          HasEvent: 1
+          EventId: 4
+        - String: ' '
+          HasEvent: 1
+          EventId: 4

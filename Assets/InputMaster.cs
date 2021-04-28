@@ -32,7 +32,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""id"": ""53edbf2a-e82b-4bf8-8e74-bb48d83af820"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Swing"",
@@ -54,6 +54,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": ""Toggle Inventory"",
                     ""type"": ""Button"",
                     ""id"": ""7c7bb207-a997-4794-ae5d-264267829419"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ThrowRope"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a0d3c2a-c124-425e-90e1-f1e91faac750"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -138,6 +146,61 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""254fb4a4-9cfd-4a1a-8ec6-fa7a5cce1b19"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""025ecdb8-ba48-48b1-a6b2-98e48eb8fec0"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""125bc76d-f76e-4884-aa53-e537945b41dc"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""10da962c-1c1f-4db4-94a2-0d55f3ebd97d"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""ace0dd50-60ea-4c12-a4ef-21bcb393cab5"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""49a60f29-9519-463d-8e28-97c1e885ee1b"",
                     ""path"": ""<Keyboard>/f"",
@@ -167,6 +230,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""Toggle Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a2f08cf-93cf-4c1d-a4d9-2e224199cc25"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ThrowRope"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -208,7 +282,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Negative"",
                     ""id"": ""f5082dc9-5638-4f17-9e76-cb7d94502cb9"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -219,7 +293,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Positive"",
                     ""id"": ""511130d7-94fc-4eaa-b425-d56ddd416a2d"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -241,7 +315,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Negative"",
                     ""id"": ""a750d97a-d8d0-4b33-bff3-928da7e8fafa"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -252,7 +326,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Positive"",
                     ""id"": ""0782b277-5a22-4e2e-af50-c40a5b6a023b"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -268,6 +342,169 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Shopping"",
+            ""id"": ""d8a4c54a-fbeb-48ee-aa10-23811aa3b8e1"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveShopCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a3cf945-00eb-4cef-8d9c-94db9ded73e6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""EndShopping"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b61c2bc-1979-4909-afed-bd648e50a172"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ItemInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""db27e1bf-d96e-4ecb-8e9e-33dbe92bb549"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""8f0fee6e-afe5-48e1-8ff2-50b1ff2dcad7"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveShopCursor"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""f90e6248-4f0f-4487-b530-e55304608c20"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveShopCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""908bafb8-3945-4d11-bb74-59eb47fbb883"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveShopCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74648998-7d9a-431d-af46-ffa1a33f5b56"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""EndShopping"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4c61ad3-697b-4bd4-9c7a-58231ba518fb"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ItemInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Inventory"",
+            ""id"": ""c20999a8-8747-4f8f-9b9a-6b4503468096"",
+            ""actions"": [
+                {
+                    ""name"": ""MoveInventoryCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""04ba6fae-9c76-444d-9726-d0f287732e20"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""a43a5464-cfb2-4620-86e2-18fe82a60280"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveInventoryCursor"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""9fb8b557-2d27-4432-ac49-d6fcf02dea9f"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveInventoryCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""37c70926-07a7-4511-90ce-b71307219a47"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MoveInventoryCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""Intro"",
+            ""id"": ""910a014d-89f9-42ba-a57b-f3cda4afba62"",
+            ""actions"": [
+                {
+                    ""name"": ""AdvanceDialog"",
+                    ""type"": ""Button"",
+                    ""id"": ""69472bf3-f732-4b91-a4f7-d9529dd39218"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ec7ba29c-a0cd-4d1e-b078-38cd633ba6d3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""AdvanceDialog"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -300,10 +537,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Swing = m_Player.FindAction("Swing", throwIfNotFound: true);
         m_Player_ShowPointer = m_Player.FindAction("ShowPointer", throwIfNotFound: true);
         m_Player_ToggleInventory = m_Player.FindAction("Toggle Inventory", throwIfNotFound: true);
+        m_Player_ThrowRope = m_Player.FindAction("ThrowRope", throwIfNotFound: true);
         // Dialog
         m_Dialog = asset.FindActionMap("Dialog", throwIfNotFound: true);
         m_Dialog_MoveCursor = m_Dialog.FindAction("MoveCursor", throwIfNotFound: true);
         m_Dialog_Confirm = m_Dialog.FindAction("Confirm", throwIfNotFound: true);
+        // Shopping
+        m_Shopping = asset.FindActionMap("Shopping", throwIfNotFound: true);
+        m_Shopping_MoveShopCursor = m_Shopping.FindAction("MoveShopCursor", throwIfNotFound: true);
+        m_Shopping_EndShopping = m_Shopping.FindAction("EndShopping", throwIfNotFound: true);
+        m_Shopping_ItemInteract = m_Shopping.FindAction("ItemInteract", throwIfNotFound: true);
+        // Inventory
+        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
+        m_Inventory_MoveInventoryCursor = m_Inventory.FindAction("MoveInventoryCursor", throwIfNotFound: true);
+        // Intro
+        m_Intro = asset.FindActionMap("Intro", throwIfNotFound: true);
+        m_Intro_AdvanceDialog = m_Intro.FindAction("AdvanceDialog", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -358,6 +607,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Swing;
     private readonly InputAction m_Player_ShowPointer;
     private readonly InputAction m_Player_ToggleInventory;
+    private readonly InputAction m_Player_ThrowRope;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -367,6 +617,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Swing => m_Wrapper.m_Player_Swing;
         public InputAction @ShowPointer => m_Wrapper.m_Player_ShowPointer;
         public InputAction @ToggleInventory => m_Wrapper.m_Player_ToggleInventory;
+        public InputAction @ThrowRope => m_Wrapper.m_Player_ThrowRope;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -391,6 +642,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @ToggleInventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
                 @ToggleInventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
                 @ToggleInventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleInventory;
+                @ThrowRope.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowRope;
+                @ThrowRope.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowRope;
+                @ThrowRope.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowRope;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -410,6 +664,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @ToggleInventory.started += instance.OnToggleInventory;
                 @ToggleInventory.performed += instance.OnToggleInventory;
                 @ToggleInventory.canceled += instance.OnToggleInventory;
+                @ThrowRope.started += instance.OnThrowRope;
+                @ThrowRope.performed += instance.OnThrowRope;
+                @ThrowRope.canceled += instance.OnThrowRope;
             }
         }
     }
@@ -455,6 +712,121 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public DialogActions @Dialog => new DialogActions(this);
+
+    // Shopping
+    private readonly InputActionMap m_Shopping;
+    private IShoppingActions m_ShoppingActionsCallbackInterface;
+    private readonly InputAction m_Shopping_MoveShopCursor;
+    private readonly InputAction m_Shopping_EndShopping;
+    private readonly InputAction m_Shopping_ItemInteract;
+    public struct ShoppingActions
+    {
+        private @InputMaster m_Wrapper;
+        public ShoppingActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveShopCursor => m_Wrapper.m_Shopping_MoveShopCursor;
+        public InputAction @EndShopping => m_Wrapper.m_Shopping_EndShopping;
+        public InputAction @ItemInteract => m_Wrapper.m_Shopping_ItemInteract;
+        public InputActionMap Get() { return m_Wrapper.m_Shopping; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ShoppingActions set) { return set.Get(); }
+        public void SetCallbacks(IShoppingActions instance)
+        {
+            if (m_Wrapper.m_ShoppingActionsCallbackInterface != null)
+            {
+                @MoveShopCursor.started -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnMoveShopCursor;
+                @MoveShopCursor.performed -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnMoveShopCursor;
+                @MoveShopCursor.canceled -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnMoveShopCursor;
+                @EndShopping.started -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnEndShopping;
+                @EndShopping.performed -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnEndShopping;
+                @EndShopping.canceled -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnEndShopping;
+                @ItemInteract.started -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnItemInteract;
+                @ItemInteract.performed -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnItemInteract;
+                @ItemInteract.canceled -= m_Wrapper.m_ShoppingActionsCallbackInterface.OnItemInteract;
+            }
+            m_Wrapper.m_ShoppingActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MoveShopCursor.started += instance.OnMoveShopCursor;
+                @MoveShopCursor.performed += instance.OnMoveShopCursor;
+                @MoveShopCursor.canceled += instance.OnMoveShopCursor;
+                @EndShopping.started += instance.OnEndShopping;
+                @EndShopping.performed += instance.OnEndShopping;
+                @EndShopping.canceled += instance.OnEndShopping;
+                @ItemInteract.started += instance.OnItemInteract;
+                @ItemInteract.performed += instance.OnItemInteract;
+                @ItemInteract.canceled += instance.OnItemInteract;
+            }
+        }
+    }
+    public ShoppingActions @Shopping => new ShoppingActions(this);
+
+    // Inventory
+    private readonly InputActionMap m_Inventory;
+    private IInventoryActions m_InventoryActionsCallbackInterface;
+    private readonly InputAction m_Inventory_MoveInventoryCursor;
+    public struct InventoryActions
+    {
+        private @InputMaster m_Wrapper;
+        public InventoryActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MoveInventoryCursor => m_Wrapper.m_Inventory_MoveInventoryCursor;
+        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
+        public void SetCallbacks(IInventoryActions instance)
+        {
+            if (m_Wrapper.m_InventoryActionsCallbackInterface != null)
+            {
+                @MoveInventoryCursor.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMoveInventoryCursor;
+                @MoveInventoryCursor.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMoveInventoryCursor;
+                @MoveInventoryCursor.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnMoveInventoryCursor;
+            }
+            m_Wrapper.m_InventoryActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MoveInventoryCursor.started += instance.OnMoveInventoryCursor;
+                @MoveInventoryCursor.performed += instance.OnMoveInventoryCursor;
+                @MoveInventoryCursor.canceled += instance.OnMoveInventoryCursor;
+            }
+        }
+    }
+    public InventoryActions @Inventory => new InventoryActions(this);
+
+    // Intro
+    private readonly InputActionMap m_Intro;
+    private IIntroActions m_IntroActionsCallbackInterface;
+    private readonly InputAction m_Intro_AdvanceDialog;
+    public struct IntroActions
+    {
+        private @InputMaster m_Wrapper;
+        public IntroActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AdvanceDialog => m_Wrapper.m_Intro_AdvanceDialog;
+        public InputActionMap Get() { return m_Wrapper.m_Intro; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(IntroActions set) { return set.Get(); }
+        public void SetCallbacks(IIntroActions instance)
+        {
+            if (m_Wrapper.m_IntroActionsCallbackInterface != null)
+            {
+                @AdvanceDialog.started -= m_Wrapper.m_IntroActionsCallbackInterface.OnAdvanceDialog;
+                @AdvanceDialog.performed -= m_Wrapper.m_IntroActionsCallbackInterface.OnAdvanceDialog;
+                @AdvanceDialog.canceled -= m_Wrapper.m_IntroActionsCallbackInterface.OnAdvanceDialog;
+            }
+            m_Wrapper.m_IntroActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @AdvanceDialog.started += instance.OnAdvanceDialog;
+                @AdvanceDialog.performed += instance.OnAdvanceDialog;
+                @AdvanceDialog.canceled += instance.OnAdvanceDialog;
+            }
+        }
+    }
+    public IntroActions @Intro => new IntroActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -471,10 +843,25 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnSwing(InputAction.CallbackContext context);
         void OnShowPointer(InputAction.CallbackContext context);
         void OnToggleInventory(InputAction.CallbackContext context);
+        void OnThrowRope(InputAction.CallbackContext context);
     }
     public interface IDialogActions
     {
         void OnMoveCursor(InputAction.CallbackContext context);
         void OnConfirm(InputAction.CallbackContext context);
+    }
+    public interface IShoppingActions
+    {
+        void OnMoveShopCursor(InputAction.CallbackContext context);
+        void OnEndShopping(InputAction.CallbackContext context);
+        void OnItemInteract(InputAction.CallbackContext context);
+    }
+    public interface IInventoryActions
+    {
+        void OnMoveInventoryCursor(InputAction.CallbackContext context);
+    }
+    public interface IIntroActions
+    {
+        void OnAdvanceDialog(InputAction.CallbackContext context);
     }
 }

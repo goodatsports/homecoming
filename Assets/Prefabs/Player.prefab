@@ -102,39 +102,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69702909b2861894cbbbb88a1c23b361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CM: {fileID: 0}
+  CM_Transpose: {fileID: 0}
+  CM_Composer: {fileID: 0}
   MovementAction:
-    m_Name: 
+    m_Name: Movement
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 80af4fcf-fa85-4440-b0b3-03dae242eff4
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
   UseAction:
-    m_Name: 
+    m_Name: Use
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: f74128ca-14d0-42b7-9fff-2f1da8385a09
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
   SwingAction:
-    m_Name: 
+    m_Name: Swing
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: b3366a23-68cd-4d5a-b344-ddb4044d7ea2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  RopeAction:
+    m_Name: Rope
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 49a33a00-9dd7-4c6b-a1ec-125da4e2e787
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
   ShowPointerAction:
-    m_Name: 
+    m_Name: Show Pointer
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: d8376e9e-01a3-423e-916f-91c8483a7c33
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  InventoryAction:
+    m_Name: Inventory
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8a8c2b5b-01f5-416e-8820-e86f04426cdf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  DialogCursorAction:
+    m_Name: Dialog Cursor
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a045a97e-26a4-4dc6-848a-b2069ff30d34
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  DialogConfirmAction:
+    m_Name: Dialog Confirm
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 21808253-eac4-4a8b-8505-de767503544f
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
   Pointer: {fileID: 0}
+  Inventory: {fileID: 0}
+  CanMove: 1
+  CanRope: 1
 --- !u!61 &6861843112284075041
 BoxCollider2D:
   m_ObjectHideFlags: 0

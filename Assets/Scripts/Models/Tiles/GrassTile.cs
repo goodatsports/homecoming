@@ -7,13 +7,4 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "New Tile", menuName = "GrassTile")]
 public class GrassTile : CustomTile
 {
-
-
-    public override void Interact()
-    {
-        Debug.Log($"Grass tile ({name}) reporting from Position ({Pos})");
-
-    }
-
-
 }
